@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Signup: React.FC = () => {
   return (<div>
       This is Sign UP page <hr></hr>
