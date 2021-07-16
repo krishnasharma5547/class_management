@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { JsxElement } from "typescript";
 
 export interface btn {
   children: string | React.FC;
