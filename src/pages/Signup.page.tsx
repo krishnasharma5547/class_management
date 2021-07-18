@@ -1,11 +1,118 @@
-// import { useFormik } from "formik";
+import { useFormik } from "formik";
 import React from "react";
-// import { useHistory } from "react-router-dom";
-// import * as yup from "yup";
+import { ImSpinner2 } from "react-icons/im";
+import { Link, useHistory } from "react-router-dom";
+import * as yup from "yup";
+import BlueLink from "../Components/BlueLink";
+import Button from "../Components/Button";
+import InputElement from "../Components/InputElement";
 const Signup: React.FC = () => {
+  const history = useHistory();
+  const formik = useFormik({
+    initialValues: {
+      userName: "",
+      password: "",
+      email: "",
+    },
+
+    validationSchema: yup.object().shape({
+      userName: yup.string().min(2).required(),
+      email: yup.string().email().required(),
+      password: yup.string().min(8).required(),
+    }),
+    onSubmit: (data) => {
+      setTimeout(() => {
+        history.push("./login");
+      }, 2000);
+    },
+  });
   return (
-    <div className="w-1/2 absolute left-0">
-      <div className="flex flex-row justify-between px-24">Signup Page</div>
+    <div className="md:w-1/2 absolute left-0">
+      <div className="flex flex-row justify-between">
+        <div className="md:w-3/4 py-8 px-11  mx-auto">
+          <div>
+            <h1 className="text-4xl text-gray-700 mb-4">
+              Get started with a free acount
+            </h1>
+            Already have an account?
+            <Link to="/login">
+              <BlueLink> Login</BlueLink>
+            </Link>
+          </div>
+          <form action="" onSubmit={formik.handleSubmit}>
+            <div className="mt-8">
+              <InputElement
+                id="userName"
+                autoComplete="new-userName"
+                type="text"
+                required
+                errors={formik.errors.userName}
+                touched={formik.touched.userName}
+                placeholder={"UserName"}
+                {...formik.getFieldProps("userName")}
+              ></InputElement>
+              <InputElement
+                id="email"
+                autoComplete="new-email"
+                type="email"
+                errors={formik.errors.email}
+                touched={formik.touched.email}
+                placeholder={"Email"}
+                required
+                {...formik.getFieldProps("email")}
+              ></InputElement>
+              <InputElement
+                id="password"
+                autoComplete="password"
+                type="password"
+                errors={formik.errors.password}
+                touched={formik.touched.password}
+                placeholder={"Password"}
+                required
+                {...formik.getFieldProps("password")}
+              ></InputElement>
+              <div className="mt-4">
+                <input type="checkbox" />{" "}
+                <span className="ml-2">
+                  I agree to the
+                  <BlueLink> terms and conditions </BlueLink>
+                </span>
+              </div>
+
+              <div className="flex justify-between mt-8">
+                <div className="mt-2">
+                  <span className="font-mono">show password </span>
+                  <input
+                    type="checkbox"
+                    id="toggle-password"
+                    className=""
+                  ></input>
+                </div>
+                <span className="w-10">
+                  {formik.isSubmitting && (
+                    <ImSpinner2 className=" w-7 h-7 mt-2 animate-spin"></ImSpinner2>
+                  )}
+                </span>
+                <div>
+                  <Button theme={"text-white bg-blue-500"} type={"submit"}>
+                    Get Started
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="text-center mt-16 px-8 pb-8">
+        <p>
+          © 2020 All Rights Reserved. <BlueLink> CORK </BlueLink> product of
+        </p>
+        <p>
+          Designreset.
+          <BlueLink> Cookie Preferences Privacy </BlueLink>, and
+          <BlueLink> Terms </BlueLink>
+        </p>
+      </div>
     </div>
   );
 };

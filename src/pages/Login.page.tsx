@@ -173,7 +173,7 @@ const history = useHistory()
     <>
       <div className="relative left-0 md:w-1/2 ">
         <div className="flex flex-row justify-between">
-          <div className="md:w-2/3 py-8 px-11  mx-auto">
+          <div className="md:w-5/6 py-8 px-11  mx-auto">
             <h1 className="text-4xl text-gray-700 mb-4">
               Log In to <BlueLink>CORK</BlueLink>
             </h1>
@@ -241,7 +241,7 @@ const history = useHistory()
         <span className="block mt-4 text-center">
           <BlueLink>Forget Password?</BlueLink>
         </span>
-        <div className="text-center mt-16">
+        <div className="text-center mt-16 px-8 pb-8">
           <p>
             © 2020 All Rights Reserved. <BlueLink> CORK </BlueLink> product of
           </p>

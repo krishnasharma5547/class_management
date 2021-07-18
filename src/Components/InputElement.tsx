@@ -18,7 +18,7 @@ return(<div>
                   <input
                     placeholder={placeholder}
                     {...rest}
-                    className={" inline-block appearance-none bg-transparent  w-full text-gray-800 mr-3 py-1 px-2 leading-tight focus:outline-none my-4 border-b-2 border-gray-200 " + className}
+                    className={" inline-block appearance-none bg-transparent  w-full text-gray-800 mr-3 py-1 px-2 leading-tight focus:outline-none my-2 border-b-2 border-gray-200 " + className}
                   ></input>
                 </div>
                 <div className="h-6">
