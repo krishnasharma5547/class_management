@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Route,
-  BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
 import LoginPage from "./Login.page";
@@ -12,7 +11,6 @@ const Auth: React.FC = () => {
   return (
     <>
           <div className="flex">
-      <Router>
         <Switch>
           <Route path="/login">
             <LoginPage />
@@ -21,16 +19,8 @@ const Auth: React.FC = () => {
             <SignupPage />
           </Route>
         </Switch>
-        </Router>
          <AuthHero />
           </div>
-        {/* <Router>
-        <Switch>
-          <Route path="/dashboard">
-            <DashboardPage />
-          </Route>
-        </Switch>
-      </Router> */}
     </>
   );
 };
