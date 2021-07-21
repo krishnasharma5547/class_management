@@ -69,7 +69,7 @@ const Signup: React.FC = () => {
               <InputElement
                 id="password"
                 autoComplete="password"
-                type="password"
+                type={enabled ? "text" : "password"}
                 errors={formik.errors.password}
                 touched={formik.touched.password}
                 className={"border-b-2 border-gray-200"}
@@ -95,7 +95,7 @@ const Signup: React.FC = () => {
                       enabled ? "bg-blue-600" : "bg-gray-200"
                     } relative inline-flex items-center h-5 rounded-full w-10`}
                   >
-                    <span className="sr-only">Enable notifications</span>
+                    <span className="sr-only"></span>
                     <span
                       className={`${
                         enabled ? "translate-x-6" : "translate-x-1"

@@ -153,6 +153,7 @@ const Login: React.FC = () => {
   //   </>
   // );
   const [enabled, setEnabled] = useState(false);
+  // const [showHidePassword, setShowHidePassword] = useState(false);
 const history = useHistory()
  const formik = useFormik({
    initialValues:{
@@ -201,7 +202,7 @@ const history = useHistory()
 
                 <InputElement
                   id="password"
-                  type="password"
+                  type={enabled ? "text" : "password"}
                   placeholder={"Password"}
                   aria-label="password"
                   autoComplete="new password"
@@ -231,7 +232,7 @@ const history = useHistory()
                       <span className="sr-only">Enable notifications</span>
                       <span
                         className={`${
-                          enabled ? "translate-x-6" : "translate-x-1" 
+                          enabled ? "translate-x-6" : "translate-x-1"
                         } inline-block w-4 h-4 transform bg-blue-500 rounded-full`}
                       />
                     </Switch>
