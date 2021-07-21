@@ -1,12 +1,15 @@
+import { Switch } from "@headlessui/react";
 import { useFormik } from "formik";
 import React from "react";
+import { useState } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import BlueLink from "../Components/BlueLink";
-import Button from "../Components/Button";
-import InputElement from "../Components/InputElement";
+import Button from "../Components/Button/Button";
+import InputElement from "../Components/InputElement/InputElement";
 const Signup: React.FC = () => {
+    const [enabled, setEnabled] = useState(false);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -48,6 +51,7 @@ const Signup: React.FC = () => {
                 required
                 errors={formik.errors.userName}
                 touched={formik.touched.userName}
+                className={"border-b-2 border-gray-200"}
                 placeholder={"UserName"}
                 {...formik.getFieldProps("userName")}
               ></InputElement>
@@ -57,6 +61,7 @@ const Signup: React.FC = () => {
                 type="email"
                 errors={formik.errors.email}
                 touched={formik.touched.email}
+                className={"border-b-2 border-gray-200"}
                 placeholder={"Email"}
                 required
                 {...formik.getFieldProps("email")}
@@ -67,6 +72,7 @@ const Signup: React.FC = () => {
                 type="password"
                 errors={formik.errors.password}
                 touched={formik.touched.password}
+                className={"border-b-2 border-gray-200"}
                 placeholder={"Password"}
                 required
                 {...formik.getFieldProps("password")}
@@ -82,11 +88,20 @@ const Signup: React.FC = () => {
               <div className="flex justify-between mt-8">
                 <div className="mt-2">
                   <span className="font-mono">show password </span>
-                  <input
-                    type="checkbox"
-                    id="toggle-password"
-                    className=""
-                  ></input>
+                  <Switch
+                    checked={enabled}
+                    onChange={setEnabled}
+                    className={`${
+                      enabled ? "bg-blue-600" : "bg-gray-200"
+                    } relative inline-flex items-center h-5 rounded-full w-10`}
+                  >
+                    <span className="sr-only">Enable notifications</span>
+                    <span
+                      className={`${
+                        enabled ? "translate-x-6" : "translate-x-1"
+                      } inline-block w-4 h-4 transform bg-blue-500 rounded-full`}
+                    />
+                  </Switch>
                 </div>
                 <span className="w-10">
                   {formik.isSubmitting && (
@@ -94,8 +109,8 @@ const Signup: React.FC = () => {
                   )}
                 </span>
                 <div>
-                  <Button theme={"text-white bg-blue-500"} type={"submit"}>
-                    Get Started
+                  <Button theme={"primary"} type={"submit"}>
+                    Get Started!
                   </Button>
                 </div>
               </div>

@@ -5,7 +5,7 @@ interface props {
   classes?: string;
 }
 const H1: React.FC<props> = ({ children, classes }) => {
-  return <h1 className={"text-4xl" + classes}>{children}</h1>;
+  return <h1 className={"text-4xl " + classes}>{children}</h1>;
 };
 
 export default React.memo(H1);

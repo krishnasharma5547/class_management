@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
-import Button from "../Components/Button";
+import Button from "../Components/Button/Button";
 import BlueLink from "../Components/BlueLink";
-import InputElement from '../Components/InputElement'
+import InputElement from '../Components/InputElement/InputElement'
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { Switch } from "@headlessui/react";
 
 const Login: React.FC = () => {
   // const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -151,6 +152,7 @@ const Login: React.FC = () => {
   //     </div>
   //   </>
   // );
+  const [enabled, setEnabled] = useState(false);
 const history = useHistory()
  const formik = useFormik({
    initialValues:{
@@ -173,7 +175,7 @@ const history = useHistory()
     <>
       <div className="relative left-0 md:w-1/2 ">
         <div className="flex flex-row justify-between">
-          <div className="md:w-5/6 py-8 px-11  mx-auto">
+          <div className="md:w-3/4 py-8 px-11  mx-auto">
             <h1 className="text-4xl text-gray-700 mb-4">
               Log In to <BlueLink>CORK</BlueLink>
             </h1>
@@ -192,6 +194,7 @@ const history = useHistory()
                   autoComplete="email"
                   required
                   errors={formik.errors.email}
+                  className={"border-b-2 border-gray-200"}
                   touched={formik.touched.email}
                   {...formik.getFieldProps("email")}
                 ></InputElement>
@@ -205,17 +208,33 @@ const history = useHistory()
                   required
                   touched={formik.touched.password}
                   errors={formik.errors.password}
+                  className={"border-b-2 border-gray-200"}
                   {...formik.getFieldProps("password")}
                 ></InputElement>
 
                 <div className="flex justify-between mt-4">
                   <div className="mt-2">
                     <span className="font-mono">show password </span>
-                    <input
+                    {/* <input
                       type="checkbox"
                       id="toggle-password"
                       className=""
-                    ></input>
+                    ></input> */}
+
+                    <Switch
+                      checked={enabled}
+                      onChange={setEnabled}
+                      className={`${
+                        enabled ? "bg-blue-600" : "bg-gray-200"
+                      } relative inline-flex items-center h-5 rounded-full w-10`}
+                    >
+                      <span className="sr-only">Enable notifications</span>
+                      <span
+                        className={`${
+                          enabled ? "translate-x-6" : "translate-x-1" 
+                        } inline-block w-4 h-4 transform bg-blue-500 rounded-full`}
+                      />
+                    </Switch>
                   </div>
                   <span className="w-10">
                     {formik.isSubmitting && (
@@ -223,7 +242,7 @@ const history = useHistory()
                     )}
                   </span>
                   <div>
-                    <Button theme={"text-white bg-blue-500"} type={"submit"}>
+                    <Button theme={"primary"} type={"submit"}>
                       Log in
                     </Button>
                   </div>
@@ -234,6 +253,7 @@ const history = useHistory()
         </div>
         <div className="text-center mt-8">
           <input type="checkbox" id="toggle-password" className=""></input>
+
           <span className="text-gray-700 font-extralight font-sans ml-1">
             Keep me logged in
           </span>
