@@ -227,7 +227,7 @@ const history = useHistory()
                       onChange={setEnabled}
                       className={`${
                         enabled ? "bg-blue-600" : "bg-gray-200"
-                      } relative inline-flex items-center h-5 rounded-full w-10`}
+                      } relative inline-flex items-center h-5 rounded-full w-10 `}
                     >
                       <span className="sr-only">Enable notifications</span>
                       <span

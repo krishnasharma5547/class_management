@@ -8,13 +8,6 @@ export default {
     theme: {
       control: { type: "select" },
     },
-    // Icon: {
-    //   options: Object.keys(icon),
-    //   mapping: icon,
-    //   control: {
-    //     type: "select",
-    //   },
-    // },
   },
 };
 
