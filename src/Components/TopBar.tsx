@@ -1,6 +1,5 @@
 import React from 'react'
 import H4 from './H4'
-import InputElement from './InputElement/InputElement'
 
 interface props{
     img:string 

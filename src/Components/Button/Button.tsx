@@ -49,7 +49,7 @@ const Button: React.FC<btn> = ({
           <span>
             <Icon
               className={
-                iconThemeClass + " " + "inline-block mr-2 mb-1  text-white "
+               "inline-block mr-2 mb-1  text-white " + iconThemeClass
               }
             ></Icon>
           </span>

@@ -8,6 +8,7 @@ import * as yup from "yup";
 import BlueLink from "../Components/BlueLink";
 import Button from "../Components/Button/Button";
 import InputElement from "../Components/InputElement/InputElement";
+
 const Signup: React.FC = () => {
     const [enabled, setEnabled] = useState(false);
   const history = useHistory();

@@ -9,6 +9,13 @@ interface props {
 }
 const Alerts: React.FC<props> = ({ className,children,theme }) => {
     const [close,setClose] = useState(false);
+    let showClass = "block";
+    if(close === true){
+      showClass = "block"
+    } 
+    else{
+      showClass = "hidden"
+    }
     let themeClass = "bg-green-300"
     let type = "Success! "
     if(theme === "warning"){
@@ -24,7 +31,7 @@ const Alerts: React.FC<props> = ({ className,children,theme }) => {
     <>
       <div
         className={
-          "h-8 w-full px-4 rounded-md shadow-md leading-8 " +" " +  themeClass
+          "h-8 w-full px-4 rounded-md shadow-md leading-8 " +" " +  themeClass + " "+ showClass
         }
       >
         <span className="absolute h-8 right-4 top-4 cursor-pointer leading-8 ">
