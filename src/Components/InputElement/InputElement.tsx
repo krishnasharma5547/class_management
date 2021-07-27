@@ -26,7 +26,7 @@ const InputElement: React.FC<props> = ({
           placeholder={placeholder}
           {...rest}
           className={
-            " inline-block appearance-none bg-transparent  w-full text-gray-800 mr-3 py-1 px-2 leading-tight focus:outline-none my-2  pb-4 " +
+            " inline-block appearance-none bg-transparent  w-full text-gray-800 py-1 px-2 leading-tight focus:outline-none pb-4 " +
             className
           }
         ></input>
