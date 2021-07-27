@@ -13,6 +13,7 @@ const ProgressBar: React.FC<props> = ({
 }) => {
   const themeClass =
     theme === "primary" ? "bg-blue-500 h-full" : "bg-green-400 h-full";
+
   return (
     <>
       {placeholder}

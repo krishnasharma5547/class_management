@@ -1,12 +1,12 @@
-import React from 'react'
-import { ButtonHTMLAttributes } from 'react';
-import { IconType } from 'react-icons';
+import React from "react";
+import { ButtonHTMLAttributes } from "react";
+import { IconType } from "react-icons";
 
 export interface btn extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   theme?: "primary" | "secondary" | "outline";
   type: "submit" | "reset" | "button";
-  Icon?:IconType;
+  Icon?: IconType;
   className?: string;
 }
 const Button: React.FC<btn> = ({
@@ -48,9 +48,7 @@ const Button: React.FC<btn> = ({
         {Icon && (
           <span>
             <Icon
-              className={
-               "inline-block mr-2 mb-1  text-white " + iconThemeClass
-              }
+              className={"inline-block mr-2 mb-1  text-white " + iconThemeClass}
             ></Icon>
           </span>
         )}
@@ -59,8 +57,8 @@ const Button: React.FC<btn> = ({
     </button>
   );
 };
-Button.defaultProps={
-  theme :"outline"
-}
+Button.defaultProps = {
+  theme: "outline",
+};
 
 export default React.memo(Button);

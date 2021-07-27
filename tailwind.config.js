@@ -3,15 +3,17 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      colors:{
-        navColor:"#0E1726",
-        search:"#212837"
-      }
-
+      colors: {
+        navColor: "#0E1726",
+        search: "#212837",
+      },
+      
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      transform: ["hover", "focus"],
+    },
   },
   plugins: [],
 };

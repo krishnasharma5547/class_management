@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
-import Button from "../Components/Button/Button";
-import BlueLink from "../Components/BlueLink";
-import InputElement from '../Components/InputElement/InputElement'
+import Button from "../../Components/Button/Button";
+import BlueLink from "../../Components/BlueLink";
+import InputElement from '../../Components/InputElement/InputElement'
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Switch } from "@headlessui/react";
+import { login } from "../../Components/Api/Auth";
+
 
 const Login: React.FC = () => {
   // const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -154,24 +156,23 @@ const Login: React.FC = () => {
   // );
   const [enabled, setEnabled] = useState(false);
   // const [showHidePassword, setShowHidePassword] = useState(false);
-const history = useHistory()
- const formik = useFormik({
-   initialValues:{
-     password:"",
-     email:"",
-   },
-   validationSchema : yup.object().shape({
-    email:  yup.string().email().required(),
-    password: yup.string().required().min(8)
-  }),
-   onSubmit:(data)=>{
-         setTimeout(() => {
-           console.log(data);
-           history.push("./dashboard")
-         }, 5000);
-   }
- })
- 
+  const history = useHistory();
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+      email: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup.string().email().required(),
+      password: yup.string().required().min(8),
+    }),
+    onSubmit: (data) => {
+      login(data).then((user) => {
+        history.push("/dashboard");
+      });
+    },
+  });
+
   return (
     <>
       <div className="relative left-0 md:w-1/2 ">
@@ -195,7 +196,7 @@ const history = useHistory()
                   autoComplete="email"
                   required
                   errors={formik.errors.email}
-                  className={"border-b-2 border-gray-200"}
+                  className={"border-b-2 border-gray-200 py-2 px-4"}
                   touched={formik.touched.email}
                   {...formik.getFieldProps("email")}
                 ></InputElement>
@@ -209,7 +210,7 @@ const history = useHistory()
                   required
                   touched={formik.touched.password}
                   errors={formik.errors.password}
-                  className={"border-b-2 border-gray-200"}
+                  className={"border-b-2 border-gray-200  py-2 px-4"}
                   {...formik.getFieldProps("password")}
                 ></InputElement>
 

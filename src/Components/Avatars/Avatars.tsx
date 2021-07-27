@@ -1,12 +1,13 @@
 import React from "react";
-import Avatar from "../../images/profile-12.jpeg";
 
 interface props {
   size: "small" | "medium" | "large";
   status: true;
   shape: "squre" | "circular";
+  url: string;
 }
-const Avatars: React.FC<props> = ({ size, status, shape }) => {
+
+const Avatars: React.FC<props> = ({ size, status, shape, url }) => {
   let cont = "";
   let img = "";
   if (shape === "circular") {
@@ -38,12 +39,12 @@ const Avatars: React.FC<props> = ({ size, status, shape }) => {
       <div className={"relative " + cont}>
         <img
           className={"border border-gray-100 shadow-sm " + " " + shapeClass}
-          src={Avatar}
+          src={url}
           alt="user img"
         />
         <div
           className={
-            "absolute bottom-0 right-0  border-2 border-white rounded-full bg-gray-400 z-10" +
+            "absolute bottom-0 right-0  border-2 border-white rounded-full bg-gray-400 z-10 hover:transform hover:translate-y-4 " +
             " " +
             statusClass +
             " " +
@@ -58,6 +59,7 @@ const Avatars: React.FC<props> = ({ size, status, shape }) => {
 Avatars.defaultProps = {
   size: "medium",
   shape: "circular",
+  url: "https://designreset.com/cork/ltr/demo4/assets/img/profile-12.jpeg",
 };
 
 export default React.memo(Avatars);

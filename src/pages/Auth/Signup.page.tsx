@@ -5,9 +5,9 @@ import { useState } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import BlueLink from "../Components/BlueLink";
-import Button from "../Components/Button/Button";
-import InputElement from "../Components/InputElement/InputElement";
+import BlueLink from "../../Components/BlueLink";
+import Button from "../../Components/Button/Button";
+import InputElement from "../../Components/InputElement/InputElement";
 
 const Signup: React.FC = () => {
     const [enabled, setEnabled] = useState(false);

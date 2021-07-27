@@ -6,7 +6,8 @@ import {
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 // import DashboardPage from "./Dashboard.page";
-import AuthHero from "../Components/AuthHero";
+import AuthHero from "../../Components/AuthHero";
+
 const Auth: React.FC = () => {
   return (
     <>

@@ -1,9 +1,11 @@
 import React from "react";
-import LinkButton from "../Components/LinkButton";
-import Sidebar from "../Components/Sidebar";
-import TopBar from "../Components/TopBar";
-import H1 from '../Components/H1'
-import BrandImage from '../images/logo.svg'
+import LinkButton from "../../Components/LinkButton";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import TopBar from "../../Components/TopBar";
+import H1 from '../../Components/H1'
+import BrandImage from '../../images/logo.svg'
+
+
 const Reacording: React.FC = () => {
   return (
     <>
