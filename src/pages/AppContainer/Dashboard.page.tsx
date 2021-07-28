@@ -8,29 +8,37 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchGroups } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
+import { User } from "../../Models/User";
+import Button from "../../Components/Button/Button";
+interface props {
+  user: User;
+}
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<props> = ({ user }) => {
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState<any>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [changes,setChanges] = useState("");
+  const [changes, setChanges] = useState("");
+  const [showGroups, setShowGroups] = useState(false);
   // const [type, setType] = useState(false)
 
+  // eslint-disable-next-line no-lone-blocks
   useEffect(() => {
-    fetchGroups({ status: "all-groups", query: query })
-      .then((response: any) => {
-        console.log(response);
-        setGroup(response);
-        setIsSubmitting(false);
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-  }, [query]);
+    showGroups &&
+      fetchGroups({ status: "all-groups", query: query })
+        .then((response: any) => {
+          console.log(response);
+          setGroup(response);
+          setIsSubmitting(false);
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+  }, [query, showGroups]);
 
   const handleChange = (e: any) => {
     setChanges(e.target.value);
-    click()
+    showGroups &&  click();
   };
   const click = () => {
     if (changes !== "") {
@@ -41,9 +49,13 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const showHideGroups = () => {
+    setShowGroups(!showGroups);
+    }
+
   return (
     <>
-      <TopBar img={BrandImage} brandName={"CRACO"} />
+      <TopBar img={BrandImage} brandName={"CRACO"} user={user} />
       <div className="flex mt-10">
         <Sidebar />
         <div className="flex flex-col  text-center py-2 px-4 w-full md:ml-60">
@@ -74,11 +86,23 @@ const Dashboard: React.FC = () => {
               Search
             </Button> */}
           </div>
+
+          <div>
+            <Button
+              type="submit"
+              theme="primary"
+              className="my-4"
+              onClick={showHideGroups}
+            >
+              {showGroups ? "Hide Data" : "Fetch Groups"}
+            </Button>
+          </div>
           <div className="flex md:flex-row flex-col flex-wrap  py-4 px-4">
-            {group &&
-              group.map((child: any,index:number) => (
+            {showGroups &&
+              group &&
+              group.map((child: any, index: number) => (
                 <Card
-                key={index}
+                  key={index}
                   description={child.description}
                   name={child.name}
                   creator={child.creator}

@@ -5,24 +5,28 @@ interface props extends InputHTMLAttributes<HTMLInputElement> {
   touched?: boolean;
   placeholder: string;
   className?: string;
+  icon?: any;
 }
 const InputElement: React.FC<props> = ({
   errors,
   touched,
   className,
   placeholder,
+  icon,
   ...rest
 }) => {
   return (
     <div>
       <label
         className="hidden uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        htmlFor="email"
+        htmlFor="ie"
       >
         {placeholder}
       </label>
-      <div>
+      <div className="flex">
+        <span className={"text-xl "+ className}>{icon}</span>
         <input
+          id="ie"
           placeholder={placeholder}
           {...rest}
           className={
@@ -31,11 +35,13 @@ const InputElement: React.FC<props> = ({
           }
         ></input>
       </div>
-        <div className="h-6">
-          {touched && <span className="text-red-500">{errors}</span>}
-        </div>
+      <div className="h-6">
+        {touched && <span className="text-red-500">{errors}</span>}
+      </div>
     </div>
   );
 };
-
+InputElement.defaultProps = {
+  icon: "",
+};
 export default React.memo(InputElement);

@@ -2,7 +2,7 @@ import React from "react";
 
 interface props {
   size: "small" | "medium" | "large";
-  status: true;
+  status: boolean;
   shape: "squre" | "circular";
   url: string;
 }
@@ -33,12 +33,12 @@ const Avatars: React.FC<props> = ({ size, status, shape, url }) => {
   }
 
   const statusClass = status === true ? "bg-green-400" : "bg-gray-400";
-  const shapeClass = shape === "circular" ? "rounded-full" : "rounded-md";
+  const shapeClass = shape === "circular" ? "rounded-cir" : "rounded-md";
   return (
     <>
       <div className={"relative " + cont}>
         <img
-          className={"border border-gray-100 shadow-sm " + " " + shapeClass}
+          className={"border border-gray-100 shadow-sm  " + " " + shapeClass}
           src={url}
           alt="user img"
         />

@@ -7,7 +7,9 @@ module.exports = {
         navColor: "#0E1726",
         search: "#212837",
       },
-      
+      borderRadius: {
+        cir: "50%",
+      },
     },
   },
   variants: {

@@ -4,12 +4,15 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import TopBar from "../../Components/TopBar";
 import H1 from '../../Components/H1'
 import BrandImage from '../../images/logo.svg'
+import { User } from "../../Models/User";
+interface props {
+  user: User;
+}
 
-
-const Reacording: React.FC = () => {
+const Reacording: React.FC<props> = ({user}) => {
   return (
     <>
-      <TopBar img={BrandImage} brandName="CORK" />
+      <TopBar img={BrandImage} brandName="CORK" user={user}/>
       <div className="w-full h-10 shadow-md"> second bar</div>
       <div className="flex mt-10">
         <Sidebar />

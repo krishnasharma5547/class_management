@@ -1,14 +1,16 @@
 import React from "react";
+import { User } from "../Models/User";
 import { logout } from "./Api/Auth";
+import Avatars from "./Avatars/Avatars";
 import Button from "./Button/Button";
 import H4 from "./H4";
 
 interface props {
   img: string;
   brandName: string;
-
+  user: User;
 }
-const TopBar: React.FC<props> = ({ img, brandName}) => {
+const TopBar: React.FC<props> = ({ img, brandName, user }) => {
   return (
     <div className="flex justify-between fixed top-0 h-10 bg-navColor w-full px-6">
       <div className=" flex space-x-10 items-center">
@@ -27,7 +29,9 @@ const TopBar: React.FC<props> = ({ img, brandName}) => {
           />
         </div>
       </div>
-      <div className="py-0.5">
+
+      <div className="flex py-0.5">
+        <img src={user.profile_pic_url} alt={"not found"}  className="rounded-full w-8 h-8 mx-4" ></img>
         <Button
           type={"button"}
           theme={"outline"}

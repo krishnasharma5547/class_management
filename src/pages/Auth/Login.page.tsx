@@ -8,9 +8,12 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Switch } from "@headlessui/react";
 import { login } from "../../Components/Api/Auth";
+import { User } from "../../Models/User";
 
-
-const Login: React.FC = () => {
+interface props{
+  onLogin:(user:User) => void
+}
+const Login: React.FC<props> = (props) => {
   // const [loginData, setLoginData] = useState({ email: "", password: "" });
   // const [touched, setTouched] = useState({ email: false, password: false });
   // const [submitting, setSubmitting] = useState(false);
@@ -168,6 +171,7 @@ const Login: React.FC = () => {
     }),
     onSubmit: (data) => {
       login(data).then((user) => {
+        props.onLogin(user);
         history.push("/dashboard");
       });
     },
@@ -261,7 +265,9 @@ const Login: React.FC = () => {
           </span>
         </div>
         <span className="block mt-4 text-center">
-          <BlueLink>Forget Password?</BlueLink>
+          <Link to="/forgotPassword">
+              <BlueLink  >Forget Password?</BlueLink>
+          </Link>
         </span>
         <div className="text-center mt-16 px-8 pb-8">
           <p>
