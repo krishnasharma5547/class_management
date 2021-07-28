@@ -9,6 +9,8 @@ import { useFormik } from "formik";
 import { Switch } from "@headlessui/react";
 import { login } from "../../Components/Api/Auth";
 import { User } from "../../Models/User";
+import { FiUser } from "react-icons/fi";
+import { HiLockClosed } from "react-icons/hi";
 
 interface props{
   onLogin:(user:User) => void
@@ -202,6 +204,7 @@ const Login: React.FC<props> = (props) => {
                   errors={formik.errors.email}
                   className={"border-b-2 border-gray-200 py-2 px-4"}
                   touched={formik.touched.email}
+                  icon={<FiUser />}
                   {...formik.getFieldProps("email")}
                 ></InputElement>
 
@@ -216,6 +219,7 @@ const Login: React.FC<props> = (props) => {
                   errors={formik.errors.password}
                   className={"border-b-2 border-gray-200  py-2 px-4"}
                   {...formik.getFieldProps("password")}
+                  icon={<HiLockClosed />}
                 ></InputElement>
 
                 <div className="flex justify-between mt-4">
@@ -266,7 +270,7 @@ const Login: React.FC<props> = (props) => {
         </div>
         <span className="block mt-4 text-center">
           <Link to="/forgotPassword">
-              <BlueLink  >Forget Password?</BlueLink>
+            <BlueLink>Forget Password?</BlueLink>
           </Link>
         </span>
         <div className="text-center mt-16 px-8 pb-8">

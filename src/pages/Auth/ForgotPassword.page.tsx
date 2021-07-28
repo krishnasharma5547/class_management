@@ -4,7 +4,7 @@ import InputElement from "../../Components/InputElement/InputElement";
 import * as yup from "yup";
 import Button from "../../Components/Button/Button";
 import BlueLink from "../../Components/BlueLink";
-import { FiUser } from "react-icons/fi";
+import { HiMail } from "react-icons/hi";
 interface props {}
 const ForgotPassword: React.FC<props> = () => {
   const formik = useFormik({
@@ -41,7 +41,7 @@ const ForgotPassword: React.FC<props> = () => {
               errors={formik.errors.email}
               className={"border-b-2 border-gray-200  py-2 px-2 mt-8"}
               {...formik.getFieldProps("email")}
-              icon={<FiUser />}
+              icon={<HiMail />}
             ></InputElement>
           </div>
           <div className="w-3/5 mx-auto">
