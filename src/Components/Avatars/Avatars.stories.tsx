@@ -8,6 +8,5 @@ export default {
 export const main = (args: any) => <Avatars {...args}></Avatars>;
 
 main.args = {
-    status:true,
     size:"medium"
 };

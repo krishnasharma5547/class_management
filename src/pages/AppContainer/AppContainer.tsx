@@ -1,21 +1,23 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { User } from "../../Models/User";
 import DashboardPage from "./Dashboard.page";
 import RecordingPage from "./Recording.page";
+import UserAccountSetting from './UserAccountSetting.page'
 
 interface props{
-  user:User
 }
-const AppContainer: React.FC<props> = (props) => {
+const AppContainer: React.FC<props> = () => {
   return (
     <div>
       <Switch>
         <Route path="/dashboard">
-          <DashboardPage user={props.user} />
+          <DashboardPage  />
         </Route>
         <Route path="/recordings">
-          <RecordingPage user={props.user} />
+          <RecordingPage />
+        </Route>
+        <Route path="/userAccountSetting">
+          <UserAccountSetting />
         </Route>
       </Switch>
     </div>

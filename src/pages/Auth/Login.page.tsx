@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
@@ -8,14 +8,13 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Switch } from "@headlessui/react";
 import { login } from "../../Components/Api/Auth";
-import { User } from "../../Models/User";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
+import AppContext from "../../AppContext";
 
 interface props{
-  onLogin:(user:User) => void
 }
-const Login: React.FC<props> = (props) => {
+const Login: React.FC<props> = () => {
   // const [loginData, setLoginData] = useState({ email: "", password: "" });
   // const [touched, setTouched] = useState({ email: false, password: false });
   // const [submitting, setSubmitting] = useState(false);
@@ -159,6 +158,8 @@ const Login: React.FC<props> = (props) => {
   //     </div>
   //   </>
   // );
+
+  const {setUser} = useContext(AppContext)
   const [enabled, setEnabled] = useState(false);
   // const [showHidePassword, setShowHidePassword] = useState(false);
   const history = useHistory();
@@ -173,7 +174,7 @@ const Login: React.FC<props> = (props) => {
     }),
     onSubmit: (data) => {
       login(data).then((user) => {
-        props.onLogin(user);
+        setUser(user);
         history.push("/dashboard");
       });
     },

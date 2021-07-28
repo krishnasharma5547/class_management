@@ -3,9 +3,12 @@ import { InputHTMLAttributes } from "react";
 interface props extends InputHTMLAttributes<HTMLInputElement> {
   errors?: string;
   touched?: boolean;
-  placeholder: string;
+  placeholder ?: string;
   className?: string;
   icon?: any;
+  errorClasses?: string;
+  label?: string;
+  labelClass? :string;
 }
 const InputElement: React.FC<props> = ({
   errors,
@@ -13,18 +16,21 @@ const InputElement: React.FC<props> = ({
   className,
   placeholder,
   icon,
+  errorClasses,
+  label,
+  labelClass,
   ...rest
 }) => {
   return (
     <div>
       <label
-        className="hidden uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        className={!label ? "hidden " : "block " +" " +  "uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 " + labelClass }
         htmlFor="ie"
       >
-        {placeholder}
+        {label}
       </label>
       <div className="flex">
-        <span className={"text-xl "+ className}>{icon}</span>
+        {icon && <span className={"text-xl " + className}>{icon}</span>}
         <input
           id="ie"
           placeholder={placeholder}
@@ -35,8 +41,8 @@ const InputElement: React.FC<props> = ({
           }
         ></input>
       </div>
-      <div className="h-6">
-        {touched && <span className="text-red-500">{errors}</span>}
+      <div className={"h-6  ml-4 " + errorClasses}>
+        {touched && <span className="text-red-500 ">{errors}</span>}
       </div>
     </div>
   );

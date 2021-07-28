@@ -2,7 +2,7 @@ import React from "react";
 
 interface props {
   size: "small" | "medium" | "large";
-  status: boolean;
+  status?: boolean;
   shape: "squre" | "circular";
   url: string;
 }
@@ -31,8 +31,12 @@ const Avatars: React.FC<props> = ({ size, status, shape, url }) => {
       img = "h-3 w-3 mt-2";
     }
   }
-
-  const statusClass = status === true ? "bg-green-400" : "bg-gray-400";
+  let statusClass = undefined;
+  if (status === true) {
+    statusClass = "bg-green-400";
+  } else if(status === false){
+    statusClass = "bg-gray-400";
+  }else{}
   const shapeClass = shape === "circular" ? "rounded-cir" : "rounded-md";
   return (
     <>
@@ -42,15 +46,17 @@ const Avatars: React.FC<props> = ({ size, status, shape, url }) => {
           src={url}
           alt="user img"
         />
-        <div
-          className={
-            "absolute bottom-0 right-0  border-2 border-white rounded-full bg-gray-400 z-10 hover:transform hover:translate-y-4 " +
-            " " +
-            statusClass +
-            " " +
-            img
-          }
-        ></div>
+        { status !== undefined && (
+          <div
+            className={
+              "absolute bottom-0 right-0  border-2 border-white rounded-full  z-10 hover:transform hover:translate-y-4 " +
+              " " +
+              statusClass +
+              " " +
+              img
+            }
+          ></div>
+        )}
       </div>
     </>
   );

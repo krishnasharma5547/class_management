@@ -8,13 +8,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchGroups } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
-import { User } from "../../Models/User";
 import Button from "../../Components/Button/Button";
 interface props {
-  user: User;
+
 }
 
-const Dashboard: React.FC<props> = ({ user }) => {
+const Dashboard: React.FC<props> = () => {
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState<any>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,7 +54,7 @@ const Dashboard: React.FC<props> = ({ user }) => {
 
   return (
     <>
-      <TopBar img={BrandImage} brandName={"CRACO"} user={user} />
+      <TopBar img={BrandImage} brandName={"CRACO"}/>
       <div className="flex mt-10">
         <Sidebar />
         <div className="flex flex-col  text-center py-2 px-4 w-full md:ml-60">

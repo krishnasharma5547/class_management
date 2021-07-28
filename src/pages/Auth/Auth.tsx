@@ -5,20 +5,16 @@ import {
 } from "react-router-dom";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
-// import DashboardPage from "./Dashboard.page";
 import AuthHero from "../../Components/AuthHero";
-import { User } from "../../Models/User";
 import ForgotPasswordPage from "./ForgotPassword.page";
-interface props {
-  onLogin: (user: User) => void;
-}
-const Auth: React.FC<props> = (props) => {
+
+const Auth: React.FC= () => {
   return (
     <>
           <div className="flex">
         <Switch>
           <Route path="/login">
-            <LoginPage onLogin={props.onLogin}/>
+            <LoginPage />
           </Route>
           <Route path="/signup">
             <SignupPage />
