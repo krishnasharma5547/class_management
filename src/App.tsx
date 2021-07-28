@@ -22,7 +22,7 @@ function App() {
       return;
     }
     me().then((u) => setUser(u));
-  }, []);
+  }, );
 
   if(!user && token){
     return <Spinner message="We are Working on it...."/>

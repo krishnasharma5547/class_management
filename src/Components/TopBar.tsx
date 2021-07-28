@@ -1,7 +1,6 @@
 import React from "react";
 import { User } from "../Models/User";
 import { logout } from "./Api/Auth";
-import Avatars from "./Avatars/Avatars";
 import Button from "./Button/Button";
 import H4 from "./H4";
 
