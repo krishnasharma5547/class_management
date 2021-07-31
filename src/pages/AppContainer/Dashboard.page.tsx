@@ -55,7 +55,7 @@ const Dashboard: React.FC<props> = () => {
   return (
     <>
       <TopBar img={BrandImage} brandName={"CRACO"}/>
-      <div className="flex mt-10">
+      <div className="flex mt-12">
         <Sidebar />
         <div className="flex flex-col  text-center py-2 px-4 w-full md:ml-60">
           <div className="bg-white shadow p-2 flex mx-auto w-96">

@@ -13,7 +13,7 @@ const Reacording: React.FC<props> = () => {
     <>
       <TopBar img={BrandImage} brandName="CORK"/>
       <div className="w-full h-10 shadow-md"> second bar</div>
-      <div className="flex mt-10">
+      <div className="flex mt-12">
         <Sidebar />
         <div>
           <H1>This is Reacording Page</H1>
