@@ -1,8 +1,10 @@
-import { Menu } from "@headlessui/react";
-import React, { useContext, useState } from "react";
+// import { Menu } from "@headlessui/react";
+import React from "react";
 import { FiMail } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import AppContext from "../AppContext";
+import { useSelector } from "react-redux";
+// import AppContext from "../AppContext";
+import { AppState } from "../Store";
 import H4 from "./H4";
 import MyDropDown from "./MyDropDown";
 
@@ -11,7 +13,8 @@ interface props {
   brandName: string;
 }
 const TopBar: React.FC<props> = ({ img, brandName }) => {
-  const { user } = useContext(AppContext);
+  // const { user } = useContext(AppContext); const dispatch = useDispatch();
+  const data = useSelector<AppState, AppState>((state) => state);
 
   return (
     <div className="flex justify-between fixed top-0 h-12 bg-navColor w-full px-6 z-20">
@@ -43,7 +46,7 @@ const TopBar: React.FC<props> = ({ img, brandName }) => {
           ></img>
         </div> */}
         <div className="fixed right-0 top-1">
-          <MyDropDown user={user!} />
+          <MyDropDown user={data.me!} />
         </div>
       </div>
     </div>

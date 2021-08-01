@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
 import BlueLink from "../../Components/BlueLink";
-import InputElement from '../../Components/InputElement/InputElement'
+import InputElement from "../../Components/InputElement/InputElement";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Switch } from "@headlessui/react";
@@ -11,9 +11,10 @@ import { login } from "../../Components/Api/Auth";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
 import AppContext from "../../AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../Store";
 
-interface props{
-}
+interface props {}
 const Login: React.FC<props> = () => {
   // const [loginData, setLoginData] = useState({ email: "", password: "" });
   // const [touched, setTouched] = useState({ email: false, password: false });
@@ -159,8 +160,17 @@ const Login: React.FC<props> = () => {
   //   </>
   // );
 
-  const {setUser} = useContext(AppContext)
-  const [enabled, setEnabled] = useState(false);
+  // const {setUser} = useContext(AppContext)
+
+  const dispatch = useDispatch();
+  const passwordToogle = useSelector<AppState, boolean>(
+    (state) => state.passwordToggle
+  );
+  // const [enabled, setEnabled] = useState(false);
+  const switchButton = () => {
+    dispatch({ type: "login/passwordToggle", payload: !passwordToogle });
+  };
+
   // const [showHidePassword, setShowHidePassword] = useState(false);
   const history = useHistory();
   const formik = useFormik({
@@ -174,7 +184,7 @@ const Login: React.FC<props> = () => {
     }),
     onSubmit: (data) => {
       login(data).then((user) => {
-        setUser(user);
+        dispatch({ type: "login/me", payload: user });
         history.push("/dashboard");
       });
     },
@@ -211,7 +221,7 @@ const Login: React.FC<props> = () => {
 
                 <InputElement
                   id="password"
-                  type={enabled ? "text" : "password"}
+                  type={passwordToogle ? "text" : "password"}
                   placeholder={"Password"}
                   aria-label="password"
                   autoComplete="new password"
@@ -233,16 +243,16 @@ const Login: React.FC<props> = () => {
                     ></input> */}
 
                     <Switch
-                      checked={enabled}
-                      onChange={setEnabled}
+                      checked={passwordToogle}
+                      onChange={switchButton}
                       className={`${
-                        enabled ? "bg-blue-600" : "bg-gray-200"
+                        passwordToogle ? "bg-blue-600" : "bg-gray-200"
                       } relative inline-flex items-center h-5 rounded-full w-10 `}
                     >
                       <span className="sr-only">Enable notifications</span>
                       <span
                         className={`${
-                          enabled ? "translate-x-6" : "translate-x-1"
+                          passwordToogle ? "translate-x-6" : "translate-x-1"
                         } inline-block w-4 h-4 transform bg-blue-500 rounded-full`}
                       />
                     </Switch>

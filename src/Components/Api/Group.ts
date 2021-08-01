@@ -14,7 +14,6 @@ import { BASE_URL } from "./Base";
    return axios
      .get<GroupResponse>(url, { params: data })
      .then((response) => {
-       console.log(response.data.data);
        return response.data.data;
      })
      .catch((error) => {

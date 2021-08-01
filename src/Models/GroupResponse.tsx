@@ -6,7 +6,7 @@ export interface GroupResponse {
     description: string;
     group_image_url: string;
     state: State;
-  };
+  }
 }
 
   export interface State {

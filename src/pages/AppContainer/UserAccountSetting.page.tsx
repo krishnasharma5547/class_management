@@ -6,11 +6,16 @@ import InputElement from "../../Components/InputElement/InputElement";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../../Components/Button/Button";
-import AppContext from "../../AppContext";
-interface props {
-}
+// import AppContext from "../../AppContext";
+import { useSelector } from "react-redux";
+// import { useReducer } from "react";
+import { AppState } from "../../Store";
+import { User } from "../../Models/User";
+interface props {}
 const UserAccountSetting: React.FC<props> = () => {
-  const {user} = useContext(AppContext)
+  // const {user} = useContext(AppContext)
+
+  const user = useSelector<AppState, User | undefined>((state) => state.me);
   const formik = useFormik({
     initialValues: {
       First_Name: "",
@@ -35,8 +40,8 @@ const UserAccountSetting: React.FC<props> = () => {
 
   return (
     <>
-      <TopBar img={BrandImage} brandName={"CRACO"}/>
-      <div className="flex mt-10">
+      <TopBar img={BrandImage} brandName={"CRACO"} />
+      <div className="flex mt-12">
         <Sidebar />
         <div className="flex flex-col   py-4 px-4 w-full md:ml-60 bg-gray-200 ">
           <div className="bg-white px-4 py-4 shadow-lg">
@@ -100,7 +105,9 @@ const UserAccountSetting: React.FC<props> = () => {
                     // value={user.last_name}
                   ></InputElement>
                   <InputElement
-                    placeholder={user!.roles ? user!.roles : "Software developer"}
+                    placeholder={
+                      user!.roles ? user!.roles : "Software developer"
+                    }
                     type="text"
                     id="role"
                     autoComplete="new-role"
@@ -135,7 +142,7 @@ const UserAccountSetting: React.FC<props> = () => {
             ></textarea>
           </div>
 
-          <div className="relative px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg">
+          <div className="relative px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg z-0">
             <h1 className="text-lg text-gray-700 mb-8">WORK PLATFORMS</h1>
             <div>
               <Button
@@ -173,7 +180,7 @@ const UserAccountSetting: React.FC<props> = () => {
 
           <div className="relative px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg">
             <h1 className="text-lg text-gray-700 mb-8">CONTACT</h1>
-            <div className="flex flex-wrap w-full">
+            <div className="flex flex-col md:flex-row flex-wrap w-full">
               <div className="flex-1 px-2">
                 <InputElement
                   placeholder={user!.roles ? user!.roles : "Software developer"}
