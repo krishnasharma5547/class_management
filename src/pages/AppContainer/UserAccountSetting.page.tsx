@@ -43,7 +43,7 @@ const UserAccountSetting: React.FC<props> = () => {
       <TopBar img={BrandImage} brandName={"CRACO"} />
       <div className="flex mt-12">
         <Sidebar />
-        <div className="flex flex-col   py-4 px-4 w-full md:ml-60 bg-gray-200 ">
+        <form className="flex flex-col   py-4 px-4 w-full md:ml-60 bg-gray-200 ">
           <div className="bg-white px-4 py-4 shadow-lg">
             <h1 className="text-lg text-gray-700">GENERAL INFORMATION</h1>
             <div className="flex flex-col md:flex-row py-4">
@@ -217,7 +217,16 @@ const UserAccountSetting: React.FC<props> = () => {
               </div>
             </div>
           </div>
-        </div>
+
+          <div className="bg-profileBottomBar rounded-t-md md:left-64 h-16 fixed bottom-0 items-center flex justify-between px-4 right-4">
+            <Button type="reset" theme={"secondary"} className={"shadow-xl bg-blue-700 hover:bg-blue-800"}>
+              Reset All
+            </Button>
+            <Button type="submit" theme={"outline"} className={"bg-green-600 shadow-lg hover:bg-green-700 text-white"}>
+              Save Changes
+            </Button>
+          </div>
+        </form>
       </div>
     </>
   );
