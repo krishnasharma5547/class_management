@@ -3,9 +3,10 @@ import React from "react";
 import { FiMail } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { User } from "../Models/User";
 // import AppContext from "../AppContext";
 import { AppState } from "../Store";
-import H4 from "./H4";
 import MyDropDown from "./MyDropDown";
 
 interface props {
@@ -14,14 +15,18 @@ interface props {
 }
 const TopBar: React.FC<props> = ({ img, brandName }) => {
   // const { user } = useContext(AppContext); const dispatch = useDispatch();
-  const data = useSelector<AppState, AppState>((state) => state);
+  const me = useSelector<AppState, User>((state) => state.me!);
 
   return (
     <div className="flex justify-between fixed top-0 h-12 bg-navColor w-full px-6 z-20">
       <div className=" flex space-x-10 items-center">
         <div className="flex justify-center items-center space-x-3 py-1">
           <img className="w-7 h-7" src={img} alt="Url not found" />
-          <H4 classes="text-white font-semibold ">{brandName}</H4>
+          <Link to="/dashboard">
+            <button className="text-white font-semibold text-xl">
+              {brandName}
+            </button>
+          </Link>
         </div>
         <div className="mt-1">
           <input
@@ -46,7 +51,7 @@ const TopBar: React.FC<props> = ({ img, brandName }) => {
           ></img>
         </div> */}
         <div className="fixed right-0 top-1">
-          <MyDropDown user={data.me!} />
+          <MyDropDown user={me!} />
         </div>
       </div>
     </div>

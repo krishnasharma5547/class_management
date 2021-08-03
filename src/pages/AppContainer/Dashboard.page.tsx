@@ -2,63 +2,73 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import TopBar from "../../Components/TopBar";
 import BrandImage from "../../images/logo.svg";
 import Card from "../../Components/Card/Card";
-import React from "react";
 import { BsSearch } from "react-icons/bs";
-import { useState } from "react";
-import { useEffect } from "react";
+import React,{ useState,useEffect } from "react";
 import { fetchGroups } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../Store";
+import { useDispatch } from "react-redux";
+import {
+  GROUP_QUERY,
+  GROUP_FETCH,
+  GROUP_SHOW_HIDE,
+  GROUP_SEARCHING,
+  useAppSelector,
+} from "../../Store";
+// import { Group } from "../../Models/Group";
 // import { GroupResponse } from "../../Models/GroupResponse";
 interface props {}
 
 const Dashboard: React.FC<props> = () => {
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   // const [group, setGroup] = useState<any>([]);
   const [changes, setChanges] = useState("");
-
-  // const [showGroups, setShowGroups] = useState(false);
-
   const dispatch = useDispatch();
-  const data = useSelector<AppState, AppState>((state) => state);
-  // const [type, setType] = useState(false)
+  const query = useAppSelector((state) => state.groupQuery);
+  const isSearching = useAppSelector((state) => state.isSearching);
+  const isCardShow = useAppSelector((state) => state.isCardShow);
 
-  // eslint-disable-next-line no-lone-blocks
+  const group = useAppSelector((state) => {
+    const groupIds = state.groupQueryMap[state.groupQuery] || [];
+    const group = groupIds.map((id) => state.groups[id]);
+    return group;
+  });
   useEffect(() => {
-    data.isCardShow &&
-      fetchGroups({ status: "all-groups", query: query })
-        .then((response: any) => {
-          dispatch({type:"group/fetch", payload:response});
-          dispatch({type:"groups/searching", payload: false});
-        })
-        .catch((error: any) => {
-          console.log(error);
+    isCardShow &&
+      fetchGroups({ status: "all-groups", query }).then((groups) => {
+        dispatch({ type: GROUP_SEARCHING, payload: false });
+        return dispatch({
+          type: GROUP_FETCH,
+          payload: { groups: groups, query: query },
         });
-  }, [query, data.isCardShow]);
-
+      }); // eslint-disable-next-line
+  }, [query, isCardShow]);
+  // let changes =""
   const handleChange = (e: any) => {
     setChanges(e.target.value);
-    console.log("data card ", data.isCardShow)
-    data.isCardShow && click();
+    // changes = e.target.value
+    console.log("data card ", isCardShow);
+    isCardShow && click();
   };
   const click = () => {
     if (changes !== "") {
-      dispatch({type:"groups/searching", payload: true});
-      setQuery(changes);
+      dispatch({ type: GROUP_SEARCHING, payload: true });
+      dispatch({ type: GROUP_QUERY, payload: changes });
     } else {
-      setQuery(changes);
+      dispatch({ type: GROUP_QUERY, payload: "" });
     }
   };
-
+  let value;
   const handleGroups = () => {
+    if (isCardShow === true) {
+      value = false;
+    } else {
+      value = true;
+    }
+    console.log("handleChange");
     // setShowGroups(!showGroups);
-    dispatch({
-      type: "groups/showHide",
-      payload: data.isCardShow ? false : true,
-    });
-        console.log("data card group", data.isCardShow);
+    dispatch({type: GROUP_SHOW_HIDE, payload:value})
+    console.log("data card group", isCardShow);
     // click();
   };
 
@@ -81,7 +91,7 @@ const Dashboard: React.FC<props> = () => {
             />
 
             <div className="w-10 ml-4">
-              {data.isSearching && (
+              {isSearching && (
                 <ImSpinner9 className=" w-7 h-7 mt-2 animate-spin mx-2"></ImSpinner9>
               )}
             </div>
@@ -103,13 +113,13 @@ const Dashboard: React.FC<props> = () => {
               className="my-4"
               onClick={handleGroups}
             >
-              {data.isCardShow ? "Hide Data" : "Fetch Groups"}
+              {isCardShow ? "Hide Data" : "Fetch Groups"}
             </Button>
           </div>
           <div className="flex md:flex-row flex-col flex-wrap  py-4 px-4">
-            {data.isCardShow &&
-              data.group &&
-              (data.group).map((child: any, index: number) => (
+            {isCardShow &&
+              group &&
+              group.map((child: any, index: number) => (
                 <Card
                   key={index}
                   description={child.description}

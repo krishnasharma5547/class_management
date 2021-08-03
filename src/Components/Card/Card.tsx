@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../../Models/User";
-import {State} from '../../Models/GroupResponse'
+import {State} from '../../Models/Group'
 import img from "../../images/developer.jpg";
 
 interface Props {

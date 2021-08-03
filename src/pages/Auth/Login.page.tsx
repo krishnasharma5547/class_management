@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
@@ -10,9 +10,9 @@ import { Switch } from "@headlessui/react";
 import { login } from "../../Components/Api/Auth";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
-import AppContext from "../../AppContext";
+// import AppContext from "../../AppContext";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../Store";
+import { AppState, GROUP_PASSWORD_TOGGLE, LOGIN_ME } from "../../Store";
 
 interface props {}
 const Login: React.FC<props> = () => {
@@ -168,7 +168,7 @@ const Login: React.FC<props> = () => {
   );
   // const [enabled, setEnabled] = useState(false);
   const switchButton = () => {
-    dispatch({ type: "login/passwordToggle", payload: !passwordToogle });
+    dispatch({ type: GROUP_PASSWORD_TOGGLE, payload: !passwordToogle });
   };
 
   // const [showHidePassword, setShowHidePassword] = useState(false);
@@ -184,7 +184,7 @@ const Login: React.FC<props> = () => {
     }),
     onSubmit: (data) => {
       login(data).then((user) => {
-        dispatch({ type: "login/me", payload: user });
+        dispatch({ type: LOGIN_ME, payload: user });
         history.push("/dashboard");
       });
     },

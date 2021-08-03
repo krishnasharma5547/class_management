@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import TopBar from "../../Components/TopBar";
 import BrandImage from "../../images/logo.svg";
 import Sidebar from "../../Components/Sidebar/Sidebar";

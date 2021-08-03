@@ -12,10 +12,9 @@ const Reacording: React.FC<props> = () => {
   return (
     <>
       <TopBar img={BrandImage} brandName="CORK"/>
-      <div className="w-full h-10 shadow-md"> second bar</div>
       <div className="flex mt-12">
         <Sidebar />
-        <div>
+        <div className="md:ml-60">
           <H1>This is Reacording Page</H1>
           <LinkButton
             theme={"text-white bg-red-500 m-4"}
