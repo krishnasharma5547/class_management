@@ -3,18 +3,22 @@ import TopBar from "../../Components/TopBar";
 import BrandImage from "../../images/logo.svg";
 import Card from "../../Components/Card/Card";
 import { BsSearch } from "react-icons/bs";
-import React,{ useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchGroups } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
 import { useDispatch } from "react-redux";
 import {
-  GROUP_QUERY,
-  GROUP_FETCH,
-  GROUP_SHOW_HIDE,
-  GROUP_SEARCHING,
+  // GROUP_FETCH,
+  // GROUP_SEARCHING,
   useAppSelector,
 } from "../../Store";
+import {
+  groupFetchAction,
+  groupQueryAction,
+  groupSerchingAction,
+  groupShowHide,
+} from "../../actions/group.actions";
 // import { Group } from "../../Models/Group";
 // import { GroupResponse } from "../../Models/GroupResponse";
 interface props {}
@@ -24,54 +28,47 @@ const Dashboard: React.FC<props> = () => {
   // const [group, setGroup] = useState<any>([]);
   const [changes, setChanges] = useState("");
   const dispatch = useDispatch();
-  const query = useAppSelector((state) => state.groupQuery);
-  const isSearching = useAppSelector((state) => state.isSearching);
-  const isCardShow = useAppSelector((state) => state.isCardShow);
-
+  const query = useAppSelector((state) => state.groups.query);
+  const isSearching = useAppSelector((state) => state.groups.isSearching);
+  const isCardShow = useAppSelector((state) => state.groups.isCardShow);
   const group = useAppSelector((state) => {
-    const groupIds = state.groupQueryMap[state.groupQuery] || [];
-    const group = groupIds.map((id) => state.groups[id]);
+    const groupIds = state.groups.queryMap[state.groups.query] || [];
+    const group = groupIds.map((id) => state.groups.byId[id]);
+    console.log("........",group)
     return group;
   });
   useEffect(() => {
     isCardShow &&
       fetchGroups({ status: "all-groups", query }).then((groups) => {
-        dispatch({ type: GROUP_SEARCHING, payload: false });
-        return dispatch({
-          type: GROUP_FETCH,
-          payload: { groups: groups, query: query },
-        });
+        groups &&
+        dispatch(groupFetchAction(query, groups));
+        dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
   }, [query, isCardShow]);
   // let changes =""
   const handleChange = (e: any) => {
     setChanges(e.target.value);
-    // changes = e.target.value
-    console.log("data card ", isCardShow);
+    // console.log("data card ", isCardShow);
     isCardShow && click();
   };
   const click = () => {
     if (changes !== "") {
-      dispatch({ type: GROUP_SEARCHING, payload: true });
-      dispatch({ type: GROUP_QUERY, payload: changes });
+      dispatch(groupSerchingAction(true));
+      dispatch(groupQueryAction(changes));
     } else {
-      dispatch({ type: GROUP_QUERY, payload: "" });
+      // dispatch(groupSerchingAction(true))
+      dispatch(groupQueryAction(changes));
     }
   };
-  let value;
+  // let value;
   const handleGroups = () => {
-    if (isCardShow === true) {
-      value = false;
-    } else {
-      value = true;
-    }
-    console.log("handleChange");
     // setShowGroups(!showGroups);
-    dispatch({type: GROUP_SHOW_HIDE, payload:value})
-    console.log("data card group", isCardShow);
+    dispatch(groupShowHide(!isCardShow));
+    // console.log("data card group", isCardShow);
     // click();
   };
-
+  console.log("show group", isCardShow);
+  console.log(group)
   return (
     <>
       <TopBar img={BrandImage} brandName={"CRACO"} />
@@ -87,6 +84,7 @@ const Dashboard: React.FC<props> = () => {
               type="text"
               placeholder="Search"
               onChange={handleChange}
+              // onChange={(e) => dispatch(groupQueryAction(e.target.value))}
               // onClick ={}
             />
 
@@ -118,8 +116,8 @@ const Dashboard: React.FC<props> = () => {
           </div>
           <div className="flex md:flex-row flex-col flex-wrap  py-4 px-4">
             {isCardShow &&
-              group &&
-              group.map((child: any, index: number) => (
+              group[1] &&
+              group.map((child, index: number) => (
                 <Card
                   key={index}
                   description={child.description}

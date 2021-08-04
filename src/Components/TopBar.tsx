@@ -2,11 +2,12 @@
 import React from "react";
 import { FiMail } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { User } from "../Models/User";
+// import { User } from "../Models/User";
+import { useAppSelector } from "../Store";
 // import AppContext from "../AppContext";
-import { AppState } from "../Store";
+// import { AppState } from "../Store";
 import MyDropDown from "./MyDropDown";
 
 interface props {
@@ -15,7 +16,8 @@ interface props {
 }
 const TopBar: React.FC<props> = ({ img, brandName }) => {
   // const { user } = useContext(AppContext); const dispatch = useDispatch();
-  const me = useSelector<AppState, User>((state) => state.me!);
+  const me = useAppSelector((state) => state.users.byId[state.auth.id!]);
+  // console.log("top bar", me)
 
   return (
     <div className="flex justify-between fixed top-0 h-12 bg-navColor w-full px-6 z-20">
@@ -51,7 +53,7 @@ const TopBar: React.FC<props> = ({ img, brandName }) => {
           ></img>
         </div> */}
         <div className="fixed right-0 top-1">
-          <MyDropDown user={me!} />
+          <MyDropDown user={me} />
         </div>
       </div>
     </div>

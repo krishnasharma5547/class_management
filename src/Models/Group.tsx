@@ -10,7 +10,7 @@ export interface Group {
   created_at: Date;
   updated_at: Date;
   chatCount: number;
-  state: State | null;
+  state: State | undefined;
   creator: User;
   issues: any[];
   invitedMembers: User[];

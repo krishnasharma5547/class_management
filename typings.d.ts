@@ -1,3 +1,3 @@
-interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__: any;
+export interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__ : any;
 }

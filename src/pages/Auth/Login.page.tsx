@@ -11,8 +11,10 @@ import { login } from "../../Components/Api/Auth";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
 // import AppContext from "../../AppContext";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState, GROUP_PASSWORD_TOGGLE, LOGIN_ME } from "../../Store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../Store";
+import { loginAction, loginPasswordToggleAction } from "../../actions/auth.actions";
+// import { AppState, GROUP_PASSWORD_TOGGLE, LOGIN_ME } from "../../Store";
 
 interface props {}
 const Login: React.FC<props> = () => {
@@ -163,12 +165,12 @@ const Login: React.FC<props> = () => {
   // const {setUser} = useContext(AppContext)
 
   const dispatch = useDispatch();
-  const passwordToogle = useSelector<AppState, boolean>(
-    (state) => state.passwordToggle
+  const passwordToogle = useAppSelector(
+    (state) => state.auth.passwordToggle
   );
   // const [enabled, setEnabled] = useState(false);
   const switchButton = () => {
-    dispatch({ type: GROUP_PASSWORD_TOGGLE, payload: !passwordToogle });
+    dispatch(loginPasswordToggleAction(!passwordToogle));
   };
 
   // const [showHidePassword, setShowHidePassword] = useState(false);
@@ -184,7 +186,7 @@ const Login: React.FC<props> = () => {
     }),
     onSubmit: (data) => {
       login(data).then((user) => {
-        dispatch({ type: LOGIN_ME, payload: user });
+        dispatch(loginAction(user));
         history.push("/dashboard");
       });
     },

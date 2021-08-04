@@ -10,16 +10,18 @@ import { Suspense, useEffect } from "react";
 import Spinner from "./Components/SpinnerModel/Spinner";
 import AppContainerLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthLazy from "./pages/Auth/Auth.lazy";
-import { User } from "./Models/User";
+// import { User } from "./Models/User";
 import { me } from "./Components/Api/Auth";
 // import AppContext from "./AppContext";
-import { AppState } from "./Store";
-import { useDispatch, useSelector } from "react-redux";
+// import { AppState } from "./Store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "./Store";
+import { meFetchAction } from "./actions/auth.actions";
 
 function App() {
   const token = localStorage.getItem(LS_LOGIN_TOKEN);
   // const [user, setUser] = useState<User>();
-  const user = useSelector<AppState, User | undefined>((state) => state.me);
+  const user =  useAppSelector((state) =>state.auth.id && state.users.byId[state.auth.id!]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function App() {
       return;
     }
     // me().then((u) => setUser(u));
-    me().then((u) => dispatch({ type: "login/me", payload: u }));
+    me().then((u) => { return dispatch(meFetchAction(u))});
   }, []);
 
   if (!user && token) {
@@ -50,6 +52,7 @@ function App() {
               path={["/dashboard", "/recordings", "/UserAccountSetting"]}
               exact
             >
+              
               {user ? <AppContainerLazy /> : <Redirect to="/login" />}
             </Route>
             <Route>

@@ -7,15 +7,16 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../../Components/Button/Button";
 // import AppContext from "../../AppContext";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import { useReducer } from "react";
-import { AppState } from "../../Store";
-import { User } from "../../Models/User";
+// import { AppState } from "../../Store";
+// import { User } from "../../Models/User";
+import { useAppSelector } from "../../Store";
 interface props {}
 const UserAccountSetting: React.FC<props> = () => {
   // const {user} = useContext(AppContext)
 
-  const user = useSelector<AppState, User | undefined>((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auth.id!])
   const formik = useFormik({
     initialValues: {
       First_Name: "",
