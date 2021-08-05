@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { logout } from "./Api/Auth";
 import { User } from "../Models/User";
 interface props {
-  user: User;
+  user?: User;
 }
 
 // const PopUp: React.FC<props> = ({ popUpToggle }) => {

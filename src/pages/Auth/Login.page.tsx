@@ -14,6 +14,7 @@ import { HiLockClosed } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../Store";
 import { loginAction, loginPasswordToggleAction } from "../../actions/auth.actions";
+import { passwordToggle } from "../../selectors/auth.selectors";
 // import { AppState, GROUP_PASSWORD_TOGGLE, LOGIN_ME } from "../../Store";
 
 interface props {}
@@ -166,7 +167,7 @@ const Login: React.FC<props> = () => {
 
   const dispatch = useDispatch();
   const passwordToogle = useAppSelector(
-    (state) => state.auth.passwordToggle
+    passwordToggle
   );
   // const [enabled, setEnabled] = useState(false);
   const switchButton = () => {

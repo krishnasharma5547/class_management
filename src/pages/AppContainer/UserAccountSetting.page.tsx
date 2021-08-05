@@ -12,11 +12,12 @@ import Button from "../../Components/Button/Button";
 // import { AppState } from "../../Store";
 // import { User } from "../../Models/User";
 import { useAppSelector } from "../../Store";
+import { meSelector } from "../../selectors/auth.selectors";
 interface props {}
 const UserAccountSetting: React.FC<props> = () => {
   // const {user} = useContext(AppContext)
 
-  const user = useAppSelector((state) => state.users.byId[state.auth.id!])
+  const user = useAppSelector(meSelector)
   const formik = useFormik({
     initialValues: {
       First_Name: "",

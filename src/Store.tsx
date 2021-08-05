@@ -95,7 +95,7 @@ const reducer = combineReducers({
 
 // export const meFetchAction = (u: User) => ({ type: LOGIN_ME, payload: u });
 
-type AppState = ReturnType<typeof reducer>;
+export type AppState = ReturnType<typeof reducer>;
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 
 export const store = createStore(

@@ -1,4 +1,6 @@
+import { bindActionCreators } from "redux";
 import { User } from "../Models/User";
+import { store } from "../Store";
 
 export const LOGIN_ME = "login/me";
 export const LOGIN_PASSWORD_TOGGLE = "login/passwordToggle";
@@ -15,3 +17,9 @@ export const loginPasswordToggleAction = (value: boolean) => ({
   type: LOGIN_PASSWORD_TOGGLE,
   payload: value,
 });
+
+// export const authActions = bindActionCreators({
+//   fetch: meFetchAction,
+//   login:loginAction,
+//   passwordToggle:loginPasswordToggleAction,
+// }, store.dispatch)

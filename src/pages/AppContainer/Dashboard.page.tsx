@@ -19,6 +19,15 @@ import {
   groupSerchingAction,
   groupShowHide,
 } from "../../actions/group.actions";
+import {
+  groupCardShowSelector,
+  groupIsSerchingSelector,
+  groupQuerySelector,
+  groupSelector,
+} from "../../selectors/groups.selectors";
+
+
+
 // import { Group } from "../../Models/Group";
 // import { GroupResponse } from "../../Models/GroupResponse";
 interface props {}
@@ -28,20 +37,21 @@ const Dashboard: React.FC<props> = () => {
   // const [group, setGroup] = useState<any>([]);
   const [changes, setChanges] = useState("");
   const dispatch = useDispatch();
-  const query = useAppSelector((state) => state.groups.query);
-  const isSearching = useAppSelector((state) => state.groups.isSearching);
-  const isCardShow = useAppSelector((state) => state.groups.isCardShow);
-  const group = useAppSelector((state) => {
-    const groupIds = state.groups.queryMap[state.groups.query] || [];
-    const group = groupIds.map((id) => state.groups.byId[id]);
-    console.log("........",group)
-    return group;
-  });
+  const query = useAppSelector(groupQuerySelector);
+  const isSearching = useAppSelector(groupIsSerchingSelector);
+  const isCardShow = useAppSelector(groupCardShowSelector);
+  // const group = useAppSelector((state) => {
+  //   const groupIds = state.groups.queryMap[state.groups.query] || [];
+  //   const group = groupIds.map((id) => state.groups.byId[id]);
+  //   console.log("........",group)
+  //   return group;
+  // });
+
+  const group = useAppSelector(groupSelector);
   useEffect(() => {
     isCardShow &&
       fetchGroups({ status: "all-groups", query }).then((groups) => {
-        groups &&
-        dispatch(groupFetchAction(query, groups));
+        groups && dispatch(groupFetchAction(query, groups));
         dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
   }, [query, isCardShow]);
@@ -68,7 +78,7 @@ const Dashboard: React.FC<props> = () => {
     // click();
   };
   console.log("show group", isCardShow);
-  console.log(group)
+  console.log(group);
   return (
     <>
       <TopBar img={BrandImage} brandName={"CRACO"} />

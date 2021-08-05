@@ -4,6 +4,7 @@ import { FiMail } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 // import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { meSelector } from "../selectors/auth.selectors";
 // import { User } from "../Models/User";
 import { useAppSelector } from "../Store";
 // import AppContext from "../AppContext";
@@ -16,7 +17,7 @@ interface props {
 }
 const TopBar: React.FC<props> = ({ img, brandName }) => {
   // const { user } = useContext(AppContext); const dispatch = useDispatch();
-  const me = useAppSelector((state) => state.users.byId[state.auth.id!]);
+  const me = useAppSelector(meSelector);
   // console.log("top bar", me)
 
   return (
