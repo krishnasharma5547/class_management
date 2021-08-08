@@ -22,9 +22,18 @@ export const groupCardShowSelector = createSelector(
   (groupState) => groupState.isCardShow
 );
 export const groupIsSerchingSelector = createSelector(
-    [groupStateSelector],
-    (groupState) => groupState.isSearching
-  );
+  [groupStateSelector],
+  (groupState) => groupState.isSearching
+);
+
+export const fetchCardIdSelector = createSelector(
+  [groupStateSelector],
+  (groupState) => groupState.CardId
+);
+export const fetchGroupByIdSelector = createSelector(
+  [groupStateSelector],
+  (groupState) => groupState.card
+);
 
 // export const groupSelector = (state: AppState) => {
 //   const groupIds = state.groups.queryMap[state.groups.query] || [];

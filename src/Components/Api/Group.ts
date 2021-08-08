@@ -15,14 +15,32 @@ interface GroupResponse {
 
 export const fetchGroups = (data: GroupRequest) => {
   const url = BASE_URL + "/groups";
-  console.log("Fetch Group is Working");
+  // console.log("FetchAll Group is Working");
 
   return axios
     .get<GroupResponse>(url, { params: data })
     .then((response) => {
-      console.log(response.data.data);
+      // console.log(response.data.data);
       return response.data.data;
     })
 
     .catch((e) => console.error(e));
 };
+
+
+//fetching group by id
+// export const fetchGroupById = (cardId: number) => {
+//   console.log("fetch Called")
+//   const url = BASE_URL + "/groups/" + cardId;
+//   // const url = BASE_URL + "/group/:id";
+
+//   console.log("fetch Called")
+//   return axios
+//     .get<Group>(url)
+//     .then((response) => {
+//       console.log(response.data);
+//       return response.data;
+//     })
+
+//     .catch((e) => console.error(e));
+// };

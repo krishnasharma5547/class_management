@@ -14,27 +14,34 @@ import {
   useAppSelector,
 } from "../../Store";
 import {
+  fetchCard,
+  // fetchFromId,
   groupFetchAction,
   groupQueryAction,
   groupSerchingAction,
   groupShowHide,
 } from "../../actions/group.actions";
 import {
+  fetchCardIdSelector,
+  fetchGroupByIdSelector,
   groupCardShowSelector,
   groupIsSerchingSelector,
   groupQuerySelector,
   groupSelector,
 } from "../../selectors/groups.selectors";
-interface props{
-}
-const Groups: React.FC<props> = () =>{
-      // const [query, setQuery] = useState("");
+import { Group } from "../../Models/Group";
+
+interface props {}
+const Groups: React.FC<props> = () => {
+  // const [query, setQuery] = useState("");
   // const [group, setGroup] = useState<any>([]);
   const [changes, setChanges] = useState("");
   const dispatch = useDispatch();
   const query = useAppSelector(groupQuerySelector);
   const isSearching = useAppSelector(groupIsSerchingSelector);
   const isCardShow = useAppSelector(groupCardShowSelector);
+  const cardId = useAppSelector(fetchCardIdSelector) as number;
+  const card = useAppSelector(fetchGroupByIdSelector);
   // const group = useAppSelector((state) => {
   //   const groupIds = state.groups.queryMap[state.groups.query] || [];
   //   const group = groupIds.map((id) => state.groups.byId[id]);
@@ -50,6 +57,17 @@ const Groups: React.FC<props> = () =>{
         dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
   }, [query, isCardShow]);
+
+  // useEffect(() => {
+  //   console.log("useEffect Called");
+  //   cardId !== 0 &&
+  //     // fetchGroupById(cardId).then((group) => {
+  //     //   console.log("fetch one called")
+  //     dispatch(groupSerchingAction(false));
+  //   // dispatch(fetchCard(group!))
+  //   // });
+  // }, [cardId]);
+
   // let changes =""
   const handleChange = (e: any) => {
     setChanges(e.target.value);
@@ -72,12 +90,28 @@ const Groups: React.FC<props> = () =>{
     // console.log("data card group", isCardShow);
     // click();
   };
-  console.log("show group", isCardShow);
-  console.log(group);
+  const OpenGroup = (cardId: number) => {
+    dispatch(groupSerchingAction(true));
+    group.forEach((child: Group) => {
+      if (child.id === cardId) {
+        dispatch(fetchCard(child));
+        dispatch(groupSerchingAction(false));
+        return 0;
+      }
+
+      return 0;
+    });
+    // dispatch(fetchFromId(cardId));
+    console.log("id Saved", cardId);
+  };
+
+  const handleNext = () => {};
+
+  const handlePrevios = () => {};
   return (
     <>
       <TopBar img={BrandImage} brandName={"CodeYogi"} />
-      <div className="flex mt-12 ">
+      <div className="flex mt-12 pb-24">
         <Sidebar />
         <div className="flex flex-col  text-center py-2 px-4 w-full md:ml-60">
           <div className="bg-white shadow p-2 flex mx-auto w-96">
@@ -119,7 +153,74 @@ const Groups: React.FC<props> = () =>{
               {isCardShow ? "Hide Data" : "Fetch Groups"}
             </Button>
           </div>
-          <div className="flex md:flex-row flex-col flex-wrap  py-4 px-4">
+          <div className="flex">
+            <div className="px-8 w-1/3">
+              {isCardShow && group[0] && (
+                <div className="">
+                  <table className="table-auto text-justify border-2 border-black mt-8 w-full">
+                    <thead>
+                      <tr>
+                        <th className="border-2 border-green-800 py-2 px-4">
+                          Name
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.map((g: Group) => (
+                        <tr className="border-2 border-green-800 cursor-pointer hover:bg-green-200">
+                          <td
+                            className="border-2 border-green-800 py-1 px-4"
+                            onClick={() => {
+                              OpenGroup(g.id);
+                            }}
+                          >
+                            {g.name}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+            <div className="mt-8">
+              {card! && (
+                <Card
+                  description={card.description}
+                  name={card.name}
+                  creator={card.creator}
+                  state={card.state}
+                  group_image_url={
+                    card.group_image_url
+                      ? card.group_image_url
+                      : "https://envri.eu/wp-content/uploads/2016/08/software-developer-copy.jpg"
+                  }
+                />
+              )}
+            </div>
+
+            <div className="bg-profileBottomBar rounded-t-md md:left-64 h-16 fixed bottom-0 items-center flex justify-between px-4 right-4">
+              <Button
+                type="reset"
+                theme={"secondary"}
+                className={"shadow-xl bg-blue-700 hover:bg-blue-800"}
+                onClick={handlePrevios}
+              >
+                Previous
+              </Button>
+              <Button
+                type="submit"
+                theme={"outline"}
+                className={
+                  "bg-green-600 shadow-xl hover:bg-green-700 text-white w-20"
+                }
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+          {/* <div className="flex md:flex-row flex-col flex-wrap  py-4 px-4">
             {isCardShow &&
               group[1] &&
               group.map((child, index: number) => (
@@ -136,11 +237,11 @@ const Groups: React.FC<props> = () =>{
                   }
                 />
               ))}
-          </div>
+          </div> */}
         </div>
       </div>
-  </>
+    </>
   );
-}
+};
 
 export default React.memo(Groups);

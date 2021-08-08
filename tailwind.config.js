@@ -19,6 +19,7 @@ module.exports = {
       backgroundColor: ["active"],
       borderWidth: ['hover', 'focus','active'],
       borderRadius : ['hover', 'focus','active'],
+      tableLayout: ['hover', 'focus'],
     },
   },
   plugins: [],
