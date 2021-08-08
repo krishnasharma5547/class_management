@@ -194,7 +194,9 @@ const Login: React.FC<props> = () => {
   });
 
   return (
+    
     <>
+    {console.log("login rerender")}
       <div className="relative left-0 md:w-1/2 ">
         <div className="flex flex-row justify-between">
           <div className="md:w-3/4 py-8 px-11  mx-auto">

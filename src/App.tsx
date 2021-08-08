@@ -49,7 +49,7 @@ function App() {
             </Route>
 
             <Route
-              path={["/dashboard", "/recordings", "/UserAccountSetting"]}
+              path={["/dashboard", "/recordings", "/userAccountSetting", "/groups"]}
               exact
             >
               

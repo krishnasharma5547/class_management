@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         navColor: "#0E1726",
         search: "#212837",
-        profileBottomBar:"#191E3A"
+        profileBottomBar: "#191E3A",
       },
       borderRadius: {
         cir: "50%",
@@ -16,6 +16,9 @@ module.exports = {
   variants: {
     extend: {
       transform: ["hover", "focus"],
+      backgroundColor: ["active"],
+      borderWidth: ['hover', 'focus','active'],
+      borderRadius : ['hover', 'focus','active'],
     },
   },
   plugins: [],

@@ -65,7 +65,7 @@ const UserAccountSetting: React.FC<props> = () => {
                     label={"First Name"}
                     labelClass={"ml-5"}
                     errors={formik.errors.First_Name}
-                    errorClasses="w-44 max-w-xl"
+                    errorClasses="w-44 max-w-xl mb-6"
                     className={
                       "border border-gray-500 py-2 px-4 rounded-lg md:mx-4 flex-1"
                     }
@@ -81,7 +81,7 @@ const UserAccountSetting: React.FC<props> = () => {
                     label={"Middle Name"}
                     labelClass={"ml-5"}
                     errors={formik.errors.Middle_Name}
-                    errorClasses="w-44 max-w-xl"
+                    errorClasses="w-44 max-w-xl  mb-6"
                     className={
                       "border border-gray-500 py-2 px-4 rounded-lg md:mx-4  flex-1"
                     }
@@ -98,7 +98,7 @@ const UserAccountSetting: React.FC<props> = () => {
                     labelClass={"ml-5"}
                     placeholder={user!.last_name}
                     errors={formik.errors.Last_Name}
-                    errorClasses="w-44 max-w-xl"
+                    errorClasses="w-44 max-w-xl  mb-6"
                     className={
                       "border border-gray-500 py-2 px-4  rounded-lg md:mx-4  flex-1"
                     }
@@ -114,7 +114,7 @@ const UserAccountSetting: React.FC<props> = () => {
                     id="role"
                     autoComplete="new-role"
                     touched={formik.touched.role}
-                    errorClasses="w-44 max-w-xl"
+                    errorClasses="w-44 max-w-xl  mb-6"
                     errors={formik.errors.role}
                     {...formik.getFieldProps("role")}
                     label={"Profession"}
