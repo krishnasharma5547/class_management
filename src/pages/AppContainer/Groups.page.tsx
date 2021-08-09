@@ -1,10 +1,10 @@
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import TopBar from "../../Components/TopBar";
 import BrandImage from "../../images/logo.svg";
-import Card from "../../Components/Card/Card";
+// import Card from "../../Components/Card/Card";
 import { BsSearch } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
-import { fetchGroups } from "../../Components/Api/Group";
+import { fetchGroupById, fetchGroups } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
 import { useDispatch } from "react-redux";
@@ -16,13 +16,14 @@ import {
 import {
   fetchCard,
   // fetchFromId,
+  // fetchFromId,
   groupFetchAction,
   groupQueryAction,
   groupSerchingAction,
   groupShowHide,
 } from "../../actions/group.actions";
 import {
-  fetchCardIdSelector,
+  // fetchCardIdSelector,
   fetchGroupByIdSelector,
   groupCardShowSelector,
   groupIsSerchingSelector,
@@ -30,9 +31,12 @@ import {
   groupSelector,
 } from "../../selectors/groups.selectors";
 import { Group } from "../../Models/Group";
+import { Link } from "react-router-dom";
+import FullCardShowPage from "./FullCardShow.page";
 
 interface props {}
 const Groups: React.FC<props> = () => {
+  let link = "/groups";
   // const [query, setQuery] = useState("");
   // const [group, setGroup] = useState<any>([]);
   const [changes, setChanges] = useState("");
@@ -40,7 +44,7 @@ const Groups: React.FC<props> = () => {
   const query = useAppSelector(groupQuerySelector);
   const isSearching = useAppSelector(groupIsSerchingSelector);
   const isCardShow = useAppSelector(groupCardShowSelector);
-  const cardId = useAppSelector(fetchCardIdSelector) as number;
+  // const cardId = useAppSelector(fetchCardIdSelector) as number;
   const card = useAppSelector(fetchGroupByIdSelector);
   // const group = useAppSelector((state) => {
   //   const groupIds = state.groups.queryMap[state.groups.query] || [];
@@ -48,6 +52,8 @@ const Groups: React.FC<props> = () => {
   //   console.log("........",group)
   //   return group;
   // });
+
+  const [cardId, setCardId] = useState(0);
 
   const group = useAppSelector(groupSelector);
   useEffect(() => {
@@ -58,15 +64,14 @@ const Groups: React.FC<props> = () => {
       }); // eslint-disable-next-line
   }, [query, isCardShow]);
 
-  // useEffect(() => {
-  //   console.log("useEffect Called");
-  //   cardId !== 0 &&
-  //     // fetchGroupById(cardId).then((group) => {
-  //     //   console.log("fetch one called")
-  //     dispatch(groupSerchingAction(false));
-  //   // dispatch(fetchCard(group!))
-  //   // });
-  // }, [cardId]);
+  useEffect(() => {
+    cardId !== 0 &&
+      fetchGroupById({ id: cardId }).then((group) => {
+        dispatch(groupSerchingAction(false));
+        dispatch(fetchCard(group!));
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardId]);
 
   // let changes =""
   const handleChange = (e: any) => {
@@ -90,20 +95,23 @@ const Groups: React.FC<props> = () => {
     // console.log("data card group", isCardShow);
     // click();
   };
-  const OpenGroup = (cardId: number) => {
-    dispatch(groupSerchingAction(true));
-    group.forEach((child: Group) => {
-      if (child.id === cardId) {
-        dispatch(fetchCard(child));
-        dispatch(groupSerchingAction(false));
-        return 0;
-      }
-
-      return 0;
-    });
-    // dispatch(fetchFromId(cardId));
-    console.log("id Saved", cardId);
-  };
+  // const OpenGroup = (cardId: number) => {
+  //   dispatch(groupSerchingAction(true));
+  //   setCardId(cardId);
+  //   <Link to="/groups/:id">
+  //     <FullCardShowPage />
+  //   </Link>;
+  //   // group.forEach((child: Group) => {
+  //   //   if (child.id === cardId) {
+  //   //     dispatch(fetchCard(child));
+  //   dispatch(groupSerchingAction(false));
+  //   //     return 0;
+  //   //   }
+  //   //   return 0;
+  //   // });
+  //   // dispatch(fetchFromId(cardId));
+  //   console.log("id Saved", cardId);
+  // };
 
   const handleNext = () => {};
 
@@ -168,14 +176,16 @@ const Groups: React.FC<props> = () => {
                     <tbody>
                       {group.map((g: Group) => (
                         <tr className="border-2 border-green-800 cursor-pointer hover:bg-green-200">
-                          <td
-                            className="border-2 border-green-800 py-1 px-4"
-                            onClick={() => {
-                              OpenGroup(g.id);
-                            }}
-                          >
-                            {g.name}
-                          </td>
+                          <Link to={link + "/:" + g.id}>
+                            <td
+                              className=" border-green-800 py-1 px-4"
+                              onClick={() => {
+                                // OpenGroup(g.id);
+                              }}
+                            >
+                              {g.name}
+                            </td>
+                          </Link>
                         </tr>
                       ))}
                     </tbody>
@@ -183,7 +193,7 @@ const Groups: React.FC<props> = () => {
                 </div>
               )}
             </div>
-            <div className="mt-8">
+            {/* <div className="mt-8">
               {card! && (
                 <Card
                   description={card.description}
@@ -197,7 +207,7 @@ const Groups: React.FC<props> = () => {
                   }
                 />
               )}
-            </div>
+            </div> */}
 
             <div className="bg-profileBottomBar rounded-t-md md:left-64 h-16 fixed bottom-0 items-center flex justify-between px-4 right-4">
               <Button

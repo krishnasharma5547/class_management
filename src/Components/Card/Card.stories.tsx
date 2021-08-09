@@ -9,6 +9,6 @@ export default {
 export const main = (args: any) => <Card {...args}></Card>;
 
 main.args = {
-  name :"Krishna sharma",
-  description: "I am a react trainee at devslane",
+  // name :"Krishna sharma",
+  // description: "I am a react trainee at devslane",
 };

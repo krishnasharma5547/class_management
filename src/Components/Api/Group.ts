@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Group } from "../../Models/Group";
-import { BASE_URL } from "./Base";
+import { BASE_URL, LS_LOGIN_TOKEN } from "./Base";
 
 interface GroupRequest {
   limit?: number;
@@ -16,31 +16,22 @@ interface GroupResponse {
 export const fetchGroups = (data: GroupRequest) => {
   const url = BASE_URL + "/groups";
   // console.log("FetchAll Group is Working");
-
   return axios
     .get<GroupResponse>(url, { params: data })
     .then((response) => {
       // console.log(response.data.data);
       return response.data.data;
-    })
-
-    .catch((e) => console.error(e));
+    }).catch((e) => console.error(e));
 };
 
-
-//fetching group by id
-// export const fetchGroupById = (cardId: number) => {
-//   console.log("fetch Called")
-//   const url = BASE_URL + "/groups/" + cardId;
-//   // const url = BASE_URL + "/group/:id";
-
-//   console.log("fetch Called")
-//   return axios
-//     .get<Group>(url)
-//     .then((response) => {
-//       console.log(response.data);
-//       return response.data;
-//     })
-
-//     .catch((e) => console.error(e));
-// };
+// fetching group by id
+export const fetchGroupById = (data: { id: number }) => {
+  const url = BASE_URL + "/groups/" + data.id;
+  // const url = BASE_URL + "/group/:id";
+  const token = localStorage.getItem(LS_LOGIN_TOKEN);
+  return axios
+    .get(url,{headers:{Authorization:token}})
+    .then((response) => {
+      return response.data.data;
+    }).catch((e) => console.error(e));
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../../Models/User";
-import {State} from '../../Models/Group'
+import { State } from "../../Models/Group";
 import img from "../../images/developer.jpg";
 
 interface Props {
@@ -18,7 +18,6 @@ const Card: React.FC<Props> = ({
   group_image_url,
   index,
 }) => {
-
   return (
     <>
       <div className="flex  max-w-lg  w-96 h-auto border-2 mr-4 mb-4 rounded-md  flex-shrink-0 overflow-hidden">
@@ -57,20 +56,18 @@ const Card: React.FC<Props> = ({
       </div>
     </>
   );
-   
 };
 
 Card.defaultProps = {
-  name: "krishna sharma",
-  description: "I am a react tranee at devsLane",
-
-  creator: {
-    id: 1,
-    first_name: "kk",
-    last_name: "sharma",
-    roles: "staff",
-    middle_name: "",
-    profile_pic_url: "",
-  },
+  // name: "krishna sharma",
+  // description: "I am a react tranee at devsLane",
+  // creator: {
+  //   id: 1,
+  //   first_name: "kk",
+  //   last_name: "sharma",
+  //   roles: "staff",
+  //   middle_name: "",
+  //   profile_pic_url: "",
+  // },
 };
 export default Card;

@@ -3,6 +3,7 @@ import {
   FETCH_CARD,
   FETCH_FROM_ID,
   GROUP_FETCH,
+  GROUP_OFFSET,
   GROUP_QUERY,
   GROUP_SEARCHING,
   GROUP_SHOW_HIDE,
@@ -17,6 +18,7 @@ export interface GroupState extends EntityState<Group> {
   isCardShow: boolean;
   CardId?: number;
   card?: void | Group;
+  offset?: number;
 }
 
 const initialState = {
@@ -26,6 +28,7 @@ const initialState = {
   isSearching: false,
   isCardShow: false,
   cardId: 23,
+  offset:10,
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -38,8 +41,9 @@ export const groupReducer: Reducer<GroupState> = (
     case GROUP_SHOW_HIDE:
       return { ...state, isCardShow: action.payload };
     case GROUP_QUERY:
-      console.log(action.payload);
       return { ...state, query: action.payload };
+    // case GROUP_OFFSET:
+    //   return { ...state, offset: action.payload };
     case FETCH_FROM_ID:
       return { ...state, id: action.payload };
     case FETCH_CARD:

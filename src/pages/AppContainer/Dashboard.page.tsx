@@ -1,6 +1,6 @@
 import React from "react";
 import TopBar from "../../Components/TopBar";
-import { User } from "../../Models/User";
+// import { User } from "../../Models/User";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../Store";
 import img from "../../images/logo.svg";

@@ -4,6 +4,7 @@ import DashboardPage from "./Dashboard.page";
 import RecordingPage from "./Recording.page";
 import UserAccountSetting from "./UserAccountSetting.page";
 import Groups from "./Groups.page"
+import FullCardShowPage from "./FullCardShow.page";
 
 interface props {}
 const AppContainer: React.FC<props> = () => {
@@ -21,6 +22,9 @@ const AppContainer: React.FC<props> = () => {
         </Route>
         <Route path="/groups">
           <Groups />
+        </Route>
+        <Route path="/groups/:">
+          <FullCardShowPage />
         </Route>
       </Switch>
     </div>

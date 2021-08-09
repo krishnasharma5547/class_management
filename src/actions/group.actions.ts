@@ -6,6 +6,7 @@ export const GROUP_QUERY = "groups/query";
 export const GROUP_SHOW_HIDE = "groups/showHide"
 export const FETCH_FROM_ID = "fetchFromId"
 export const FETCH_CARD = "fetchCard"
+export const GROUP_OFFSET = "groupOffset"
 
 export const groupQueryAction = (query:string) => ({
     type:GROUP_QUERY,
@@ -37,3 +38,8 @@ export const fetchCard = (card:Group) => ({
     type:FETCH_CARD,
     payload:card
 })
+
+// export const groupOffset = (offset:number) => ({
+//     type:GROUP_OFFSET,
+//     payload:offset
+// })

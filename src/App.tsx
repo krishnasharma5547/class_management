@@ -17,11 +17,14 @@ import { me } from "./Components/Api/Auth";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "./Store";
 import { meFetchAction } from "./actions/auth.actions";
+import FullCardShowPage from "./pages/AppContainer/FullCardShow.page";
 
 function App() {
   const token = localStorage.getItem(LS_LOGIN_TOKEN);
   // const [user, setUser] = useState<User>();
-  const user =  useAppSelector((state) =>state.auth.id && state.users.byId[state.auth.id!]);
+  const user = useAppSelector(
+    (state) => state.auth.id && state.users.byId[state.auth.id!]
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +32,9 @@ function App() {
       return;
     }
     // me().then((u) => setUser(u));
-    me().then((u) => { return dispatch(meFetchAction(u))});
+    me().then((u) => {
+      return dispatch(meFetchAction(u));
+    });
   }, []);
 
   if (!user && token) {
@@ -49,12 +54,21 @@ function App() {
             </Route>
 
             <Route
-              path={["/dashboard", "/recordings", "/userAccountSetting", "/groups"]}
+              path={[
+                "/dashboard",
+                "/recordings",
+                "/userAccountSetting",
+                "/groups",
+              ]}
               exact
             >
-              
               {user ? <AppContainerLazy /> : <Redirect to="/login" />}
             </Route>
+            <Route
+              exact
+              path="/groups/:id"
+              component={FullCardShowPage}
+            ></Route>
             <Route>
               <NotFoundPage />
             </Route>
