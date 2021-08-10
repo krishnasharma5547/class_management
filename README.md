@@ -18,3 +18,17 @@ A Complete Class Management Project
 8. create Button inputElement and ProgressBar stories
 
 9. make showpassword toggle button working
+
+10. groups card created on dashboard 
+
+11. created user setting page
+
+12. project shifts to redux
+
+13. multi reducers implemented
+
+14. use of createSelector(reselect)
+
+15. created group page (previously on dashboard page) 
+
+16. created click to open group detail
