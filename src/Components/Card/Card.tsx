@@ -11,6 +11,10 @@ interface Props {
   state?: State;
   index?: number;
 }
+
+export const handleError = (e:any) => {
+    e.target.src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPSJ73ZlCoLJpdPHMAw-eTFnMrF1Mn1Ieaqvbu_BF9iSO4XWoX9LabOH5NEkugkZ1hUYs&usqp=CAU"
+} 
 const Card: React.FC<Props> = ({
   name,
   creator,
@@ -22,12 +26,13 @@ const Card: React.FC<Props> = ({
     <>
       <div className="flex  max-w-lg  w-96 h-auto border-2 mr-4 mb-4 rounded-md  flex-shrink-0 overflow-hidden">
         <div className="flex">
-          <div className="flex flex-shrink-0 items-center justify-center w-2/5  min-w-max max-w-max rounded-md bg-red-300 h-full p-4">
+          <div className="flex flex-shrink-0 items-center justify-center w-2/5  min-w-max max-w-max rounded-md bg-red-300 h-full p-4 ">
             {group_image_url ? (
               <img
-                className="rounded-full h-24 w-24"
+                className="rounded-full h-24 w-24 object-cover object-center"
                 src={group_image_url}
                 alt={""}
+                onError ={handleError}
                 width="24"
                 height="24"
               />
@@ -48,7 +53,7 @@ const Card: React.FC<Props> = ({
                 <span>
                   Name: {creator?.first_name + " " + creator?.last_name}{" "}
                 </span>
-                <span className="block">Role: {creator?.roles} </span>
+                <span className="block">email: {creator?.email} </span>
               </div>
             </div>
           </div>
