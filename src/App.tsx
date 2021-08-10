@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "./Store";
 import { meFetchAction } from "./actions/auth.actions";
 import FullCardShowPage from "./pages/AppContainer/FullCardShow.page";
+import NoConnectionPage from "./pages/AppContainer/NoConnection.page";
 
 function App() {
   const token = localStorage.getItem(LS_LOGIN_TOKEN);
@@ -69,6 +70,9 @@ function App() {
               path="/groups/:id"
               component={FullCardShowPage}
             ></Route>
+            <Route exact path="/noInternet">
+              <NoConnectionPage/>
+            </Route>
             <Route>
               <NotFoundPage />
             </Route>

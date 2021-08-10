@@ -3,7 +3,7 @@ import {
   FETCH_CARD,
   FETCH_FROM_ID,
   GROUP_FETCH,
-  GROUP_OFFSET,
+  // GROUP_OFFSET,
   GROUP_QUERY,
   GROUP_SEARCHING,
   GROUP_SHOW_HIDE,
@@ -26,7 +26,7 @@ const initialState = {
   query: "",
   queryMap: {},
   isSearching: false,
-  isCardShow: false,
+  isCardShow: true,
   cardId: 23,
   offset:10,
 };
@@ -49,6 +49,7 @@ export const groupReducer: Reducer<GroupState> = (
     case FETCH_CARD:
       return { ...state, card: action.payload };
     case GROUP_FETCH:
+      console.log("reducer working");
       const groups = action.payload.groups as Group[];
       // const groupIds = groups.map((e) => e.id)
       const groupIds = getIds(groups);

@@ -48,3 +48,16 @@ export const me = (() => {
    const url = BASE_URL + "/me";
     return axios.get<meResponse>(url).then((response) =>response.data.data)
 })
+
+export const updateProfile = (data: User)=>{
+  const url = BASE_URL + "/me";
+  console.log(data);
+  return axios.put(url,data)
+      .then((response) => {
+        window.location.href = "/dashboard";
+          console.log(response);
+      })
+      .catch((error) => {
+          console.log(error);
+      })
+}

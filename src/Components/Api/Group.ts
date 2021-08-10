@@ -2,14 +2,14 @@ import axios from "axios";
 import { Group } from "../../Models/Group";
 import { BASE_URL, LS_LOGIN_TOKEN } from "./Base";
 
-interface GroupRequest {
+export interface GroupRequest {
   limit?: number;
   offset?: number;
   query?: string;
   status: "all-groups" | "favourite" | "archieved";
 }
 
-interface GroupResponse {
+export interface GroupResponse {
   data: Group[];
 }
 

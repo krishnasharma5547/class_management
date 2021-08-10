@@ -5,6 +5,7 @@ import { IoMdExit } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { logout } from "./Api/Auth";
 import { User } from "../Models/User";
+import { handleError } from "./Card/Card";
 interface props {
   user?: User;
 }
@@ -19,6 +20,7 @@ const MyDropdown: React.FC<props> = ({ user }) => {
             <img
               src={user!.profile_pic_url}
               alt={"not found"}
+              onError={handleError}
               className="rounded w-8 h-8 mx-4 mt-1"
             ></img>
           </button>
