@@ -7,7 +7,7 @@ import {
   GROUP_QUERY,
   GROUP_SEARCHING,
   GROUP_SHOW_HIDE,
-} from "../actions/group.actions";
+} from "../actions/Constants";
 import { Group } from "../Models/Group";
 import { addMany, EntityState, getIds } from "./entity.reducer";
 
@@ -28,7 +28,7 @@ const initialState = {
   isSearching: false,
   isCardShow: true,
   cardId: 23,
-  offset:10,
+  offset: 10,
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -39,9 +39,9 @@ export const groupReducer: Reducer<GroupState> = (
     case GROUP_SEARCHING:
       return { ...state, isSearching: action.payload };
     case GROUP_SHOW_HIDE:
-      return { ...state, isCardShow: action.payload };
+      return { ...state, isCardShow: action.payload};
     case GROUP_QUERY:
-      return { ...state, query: action.payload };
+      return { ...state, query: action.payload,isSearching:true };
     // case GROUP_OFFSET:
     //   return { ...state, offset: action.payload };
     case FETCH_FROM_ID:
@@ -52,13 +52,14 @@ export const groupReducer: Reducer<GroupState> = (
       console.log("reducer working");
       const groups = action.payload.groups as Group[];
       // const groupIds = groups.map((e) => e.id)
-      const groupIds = getIds(groups);
+      const groupIds = groups && getIds(groups);
       // const entityMap = entities.reduce((prev, entity) => {
       //   return { ...prev, [entity.id]: entity };
       // }, {});
       const newState = addMany(state, groups) as GroupState;
       return {
         ...newState,
+        isSearching:false,
         queryMap: {
           ...newState.queryMap,
           [action.payload.query]: groupIds,

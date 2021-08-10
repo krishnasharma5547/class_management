@@ -5,7 +5,7 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import InputElement from "../../Components/InputElement/InputElement";
 import { handleError } from "../../Components/Card/Card";
 import { useFormik } from "formik";
-// import * as yup from "yup";
+import * as yup from "yup";
 import Button from "../../Components/Button/Button";
 // import AppContext from "../../AppContext";
 // import { useSelector } from "react-redux";
@@ -29,24 +29,18 @@ const UserAccountSetting: React.FC<props> = () => {
       profile_pic_url: user?.profile_pic_url,
       phone_number: user?.phone_number,
       email: user?.email,
-      birth_date: user?.birth_date,
-      birth_month: user?.birth_month,
-      birth_year: user?.birth_year,
       // phone_number: user?.phone_number,
       // email: user?.email,
       // bio: user!.bio,
       // id: 0,
     },
-    // validationSchema: yup.object().shape({
-    //   First_Name: yup.string().min(2).required(),
-    //   Middle_Name: yup.string().min(2).required(),
-    //   Last_Name: yup.string().min(2).required(),
-    //   // phone: yup.string().min(4).required(),
-    //   title: yup.string().min(4).required(),
-    //   location: yup.string().min(3).required(),
-    //   phone: yup.string().required().min(10),
-    //   mail: yup.string().email().required()
-    // }),
+    validationSchema: yup.object().shape({
+      First_Name: yup.string().min(2).required(),
+      Middle_Name: yup.string().min(2).required(),
+      Last_Name: yup.string().min(2).required(),
+      phone_number: yup.string().required().min(10),
+      email: yup.string().email().required(),
+    }),
 
     onSubmit: (user) => {
       updateProfile(user as User).then(() => {
@@ -203,8 +197,8 @@ const UserAccountSetting: React.FC<props> = () => {
             </div>
           </div>
 
-          <div className=" px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg">
-            {/* <h1 className="text-lg text-gray-700 mb-8">ABOUT</h1>
+          {/* <div className=" px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg"> */}
+          {/* <h1 className="text-lg text-gray-700 mb-8">ABOUT</h1>
             <label htmlFor="about" className="text-gray-400 m-1">
               Bio
             </label>
@@ -226,7 +220,7 @@ const UserAccountSetting: React.FC<props> = () => {
                 </option>
               </select>
             </div> */}
-          </div>
+          {/* </div> */}
 
           <div className="relative px-8 mt-4 justify-between items-center bg-white py-4 shadow-lg">
             <h1 className="text-lg text-gray-700 mb-8">CONTACT</h1>

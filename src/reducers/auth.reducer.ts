@@ -1,5 +1,5 @@
 import { Reducer } from "redux"
-import { LOGIN_ME, LOGIN_PASSWORD_TOGGLE, ME_FETCH } from "../actions/auth.actions"
+import { LOGIN_ME, LOGIN_PASSWORD_TOGGLE, ME_FETCH } from "../actions/Constants"
 
 export interface AuthState {
     id?: number;

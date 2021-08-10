@@ -15,16 +15,17 @@ import {
 } from "../../Store";
 import {
   fetchCard,
+  // fetchCard,
   // fetchFromId,
   // fetchFromId,
   groupFetchAction,
-  groupQueryAction,
+  // groupQueryAction,
   groupSerchingAction,
   groupShowHide,
 } from "../../actions/group.actions";
 import {
   // fetchCardIdSelector,
-  fetchGroupByIdSelector,
+  // fetchGroupByIdSelector,
   groupCardShowSelector,
   groupIsSerchingSelector,
   groupQuerySelector,
@@ -32,20 +33,21 @@ import {
 } from "../../selectors/groups.selectors";
 import { Group } from "../../Models/Group";
 import { Link } from "react-router-dom";
-import FullCardShowPage from "./FullCardShow.page";
+// import FullCardShowPage from "./FullCardShow.page";
+import { fetchGroup } from "../../middlewares/groups.middleware";
 
 interface props {}
 const Groups: React.FC<props> = () => {
   let link = "/groups";
   // const [query, setQuery] = useState("");
   // const [group, setGroup] = useState<any>([]);
-  const [changes, setChanges] = useState("");
+  // const [changes, setChanges] = useState("");
   const dispatch = useDispatch();
   const query = useAppSelector(groupQuerySelector);
   const isSearching = useAppSelector(groupIsSerchingSelector);
   const isCardShow = useAppSelector(groupCardShowSelector);
   // const cardId = useAppSelector(fetchCardIdSelector) as number;
-  const card = useAppSelector(fetchGroupByIdSelector);
+  // const card = useAppSelector(fetchGroupByIdSelector);
   // const group = useAppSelector((state) => {
   //   const groupIds = state.groups.queryMap[state.groups.query] || [];
   //   const group = groupIds.map((id) => state.groups.byId[id]);
@@ -56,13 +58,14 @@ const Groups: React.FC<props> = () => {
   const [cardId, setCardId] = useState(0);
 
   const group = useAppSelector(groupSelector);
+  console.log(group);
   useEffect(() => {
     isCardShow &&
-      fetchGroups({ status: "all-groups", query }).then((groups) => {
+      fetchGroups({ status: "all-groups" }).then((groups) => {
         groups && dispatch(groupFetchAction(query, groups));
-        dispatch(groupSerchingAction(false));
+        // dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
-  }, [query, isCardShow]);
+  }, []);
 
   useEffect(() => {
     cardId !== 0 &&
@@ -74,20 +77,20 @@ const Groups: React.FC<props> = () => {
   }, [cardId]);
 
   // let changes =""
-  const handleChange = (e: any) => {
-    setChanges(e.target.value);
-    // console.log("data card ", isCardShow);
-    isCardShow && click();
-  };
-  const click = () => {
-    if (changes !== "") {
-      dispatch(groupSerchingAction(true));
-      dispatch(groupQueryAction(changes));
-    } else {
-      // dispatch(groupSerchingAction(true))
-      dispatch(groupQueryAction(changes));
-    }
-  };
+  // const handleChange = (e: any) => {
+  //   setChanges(e.target.value);
+  //   // console.log("data card ", isCardShow);
+  //   isCardShow && click();
+  // };
+  // const click = () => {
+  //   if (changes !== "") {
+  //     dispatch(groupSerchingAction(true));
+  //     dispatch(groupQueryAction(changes));
+  //   } else {
+  //     // dispatch(groupSerchingAction(true))
+  //     dispatch(groupQueryAction(changes));
+  //   }
+  // };
   // let value;
   const handleGroups = () => {
     // setShowGroups(!showGroups);
@@ -130,7 +133,10 @@ const Groups: React.FC<props> = () => {
               className="rounded p-2 w-full bg-gray-300"
               type="text"
               placeholder="Search"
-              onChange={handleChange}
+              onChange={(e) => {
+                isCardShow &&
+                  fetchGroup({ query: e.target.value, status: "all-groups" });
+              }}
               // onChange={(e) => dispatch(groupQueryAction(e.target.value))}
               // onClick ={}
             />
@@ -188,6 +194,7 @@ const Groups: React.FC<props> = () => {
                           </Link>
                         </tr>
                       ))}
+                      {!isSearching && group.length === 0 && "No data Found"}
                     </tbody>
                   </table>
                 </div>
