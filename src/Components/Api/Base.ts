@@ -15,6 +15,9 @@ axios.interceptors.request.use((config) => {
 });
 
 axios.interceptors.response.use(undefined, (error) => {
+  if(!error.response){
+      window.location.href = "/noInternet";
+  }
   if (error.response.data?.code === 9101) {
     localStorage.removeItem(LS_LOGIN_TOKEN);
     window.location.href = "/login";
