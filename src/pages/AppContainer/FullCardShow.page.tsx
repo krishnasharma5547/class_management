@@ -31,7 +31,7 @@ const FullCardShow: React.FC<props> = () => {
       dispatch(fetchCard(group!));
       dispatch(groupSerchingAction(false));
       // setdata(group);
-    });
+    }); //eslint-disable-next-line
   }, []);
 
   return (

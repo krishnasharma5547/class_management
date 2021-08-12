@@ -1,9 +1,10 @@
-
-import axios, { Canceler } from "axios";
-import { groupActions } from "../actions/group.actions";
-import { fetchGroups, GroupRequest } from "../Components/Api/Group";
+// import axios, { Canceler } from "axios";
+// import { groupActions } from "../actions/group.actions";
+// import { fetchGroups, GroupRequest } from "../Components/Api/Group";
 // import { groupQueryMapSelector } from "../selectors/groups.selectors";
 // import { store } from "../Store";
+
+import { GroupRequest } from "../Components/Api/Group";
 
 // export const fetchGroup = (request: GroupRequest) => {
 //   const query:string = request.query!;
@@ -13,7 +14,6 @@ import { fetchGroups, GroupRequest } from "../Components/Api/Group";
 //     groupActions.fetch(query, groups!);
 //   });
 // };
-
 
 // export const fetchGroup = (request: GroupRequest) => {
 //   const query:string = request.query!;
@@ -31,17 +31,15 @@ import { fetchGroups, GroupRequest } from "../Components/Api/Group";
 //   });
 // };
 
-let canceler:Canceler | undefined;
+// let canceler:Canceler | undefined;
 export const fetchGroup = (request: GroupRequest) => {
-  const query:string = request.query!;
-  groupActions.query(query);
-  canceler && canceler();
-
-  const {cancel, token} = axios.CancelToken.source();
-
-  canceler = cancel;
-  fetchGroups(request,token).then((groups) => {
-    groupActions.fetch(query, groups!);
-    canceler = undefined;
-  });
+  // const query:string = request.query!;
+  // groupActions.query(query);
+  // canceler && canceler();
+  // const {cancel, token} = axios.CancelToken.source();
+  // canceler = cancel;
+  // fetchGroups(request,token).then((groups) => {
+  //   groupActions.fetch(query, groups!);
+  //   canceler = undefined;
+  //   });
 };

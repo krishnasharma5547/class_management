@@ -1,6 +1,6 @@
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { Group } from "../Models/Group";
-import { store } from "../Store";
+// import { store } from "../Store";
 import {
   FETCH_CARD,
   FETCH_FROM_ID,
@@ -45,11 +45,11 @@ export const fetchCard = (card: Group) => ({
 //     payload:offset
 // })
 
-export const groupActions = bindActionCreators({
-  query: groupQueryAction,
-  fetch:groupFetchAction,
-  search:groupSerchingAction,
-  groupShowHide:groupShowHide,
-  fetchFromId:fetchFromId,
-  fetchCard:fetchCard,
-}, store.dispatch)
+// export const groupActions = bindActionCreators({
+//   query: groupQueryAction,
+//   fetch:groupFetchAction,
+//   search:groupSerchingAction,
+//   groupShowHide:groupShowHide,
+//   fetchFromId:fetchFromId,
+//   fetchCard:fetchCard,
+// }, store.dispatch)

@@ -35,7 +35,7 @@ function App() {
     // me().then((u) => setUser(u));
     me().then((u) => {
       return dispatch(meFetchAction(u));
-    });
+    });//eslint-disable-next-line
   }, []);
 
   if (!user && token) {

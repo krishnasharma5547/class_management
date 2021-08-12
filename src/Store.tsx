@@ -1,10 +1,13 @@
 // import { User } from "./Models/User";
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 // import { Group } from "./Models/Group";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { groupReducer } from "./reducers/groups.reducer";
 import { authReducer } from "./reducers/auth.reducer";
 import { userReducer } from "./reducers/users.reducer";
+import { sagaMiddleware } from "./Sagas";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { watchGroupQueryChange } from "./Sagas/group.saga";
 // import { userReducer, UserState } from "./reducers/users.reducer";
 export const LOGIN_ME = "login/me";
 export const GROUP_SHOW_HIDE = "group/fetch";
@@ -99,6 +102,9 @@ export type AppState = ReturnType<typeof reducer>;
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 
 export const store = createStore(
-  reducer
+  reducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+sagaMiddleware.run(watchGroupQueryChange);

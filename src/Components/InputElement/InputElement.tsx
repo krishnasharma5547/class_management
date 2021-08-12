@@ -3,12 +3,12 @@ import { InputHTMLAttributes } from "react";
 interface props extends InputHTMLAttributes<HTMLInputElement> {
   errors?: string;
   touched?: boolean;
-  placeholder ?: string;
+  placeholder?: string;
   className?: string;
   icon?: any;
   errorClasses?: string;
   label?: string;
-  labelClass? :string;
+  labelClass?: string;
 }
 const InputElement: React.FC<props> = ({
   errors,
@@ -24,7 +24,15 @@ const InputElement: React.FC<props> = ({
   return (
     <div>
       <label
-        className={!label ? "hidden " : "block " +" " +  "uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 " + labelClass }
+        // eslint-disable-next-line no-useless-concat
+        className={
+          !label
+            ? "hidden "
+            : "block " +
+              " " +
+              "uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 " +
+              labelClass
+        }
         htmlFor="ie"
       >
         {label}

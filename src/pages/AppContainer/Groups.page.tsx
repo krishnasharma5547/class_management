@@ -4,7 +4,7 @@ import BrandImage from "../../images/logo.svg";
 // import Card from "../../Components/Card/Card";
 import { BsSearch } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
-import { fetchGroupById, fetchGroups } from "../../Components/Api/Group";
+import { fetchGroupById, fetchGroupsApi } from "../../Components/Api/Group";
 import { ImSpinner9 } from "react-icons/im";
 import Button from "../../Components/Button/Button";
 import { useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ import {
   // fetchFromId,
   // fetchFromId,
   groupFetchAction,
+  groupQueryAction,
   // groupQueryAction,
   groupSerchingAction,
   groupShowHide,
@@ -34,7 +35,7 @@ import {
 import { Group } from "../../Models/Group";
 import { Link } from "react-router-dom";
 // import FullCardShowPage from "./FullCardShow.page";
-import { fetchGroup } from "../../middlewares/groups.middleware";
+// import { fetchGroup } from "../../middlewares/groups.middleware";
 
 interface props {}
 const Groups: React.FC<props> = () => {
@@ -55,14 +56,14 @@ const Groups: React.FC<props> = () => {
   //   return group;
   // });
 
-  const [cardId, setCardId] = useState(0);
+  const [cardId] = useState(0);
 
   const group = useAppSelector(groupSelector);
   console.log(group);
   useEffect(() => {
     isCardShow &&
-      fetchGroups({ status: "all-groups" }).then((groups) => {
-        groups && dispatch(groupFetchAction(query, groups));
+    fetchGroupsApi({ status: "all-groups" }).then((groups) => {
+        groups && dispatch(groupFetchAction(query, groups.data.data));
         // dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
   }, []);
@@ -135,7 +136,8 @@ const Groups: React.FC<props> = () => {
               placeholder="Search"
               onChange={(e) => {
                 isCardShow &&
-                  fetchGroup({ query: e.target.value, status: "all-groups" });
+                  // fetchGroup({ query: e.target.value, status: "all-groups" });
+                    dispatch(groupQueryAction(e.target.value))
               }}
               // onChange={(e) => dispatch(groupQueryAction(e.target.value))}
               // onClick ={}
