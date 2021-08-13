@@ -13,6 +13,7 @@ import {
 } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../Store";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+import Spinner from "../../Components/SpinnerModel/Spinner";
 interface props {}
 const FullCardShow: React.FC<props> = () => {
   // const location = useLocation();
@@ -33,10 +34,13 @@ const FullCardShow: React.FC<props> = () => {
       dispatch(groupSerchingAction(false));
       // setdata(group);
     }); //eslint-disable-next-line
-  }, []);
-
+  }, [groupId]);
+  if(!cardData){
+    return <Spinner message="group loading"/>
+  }
   return (
     <>
+    
       {/* <div className="bg-gray-300 px-4 py-4 border-2 border-black"> */}
       <TopBar img={BrandImage} brandName={"CodeYogi"} />
       <div className="flex mt-12 pb-24">
