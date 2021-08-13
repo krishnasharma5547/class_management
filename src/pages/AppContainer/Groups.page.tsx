@@ -62,7 +62,7 @@ const Groups: React.FC<props> = () => {
   console.log(group);
   useEffect(() => {
     isCardShow &&
-    fetchGroupsApi({ status: "all-groups" }).then((groups) => {
+      fetchGroupsApi({ status: "all-groups" }).then((groups) => {
         groups && dispatch(groupFetchAction(query, groups.data.data));
         // dispatch(groupSerchingAction(false));
       }); // eslint-disable-next-line
@@ -137,7 +137,7 @@ const Groups: React.FC<props> = () => {
               onChange={(e) => {
                 isCardShow &&
                   // fetchGroup({ query: e.target.value, status: "all-groups" });
-                    dispatch(groupQueryAction(e.target.value))
+                  dispatch(groupQueryAction(e.target.value));
               }}
               // onChange={(e) => dispatch(groupQueryAction(e.target.value))}
               // onClick ={}
@@ -183,8 +183,8 @@ const Groups: React.FC<props> = () => {
                     </thead>
                     <tbody>
                       {group.map((g: Group) => (
-                        <tr className="border-2 border-green-800 cursor-pointer hover:bg-green-200">
-                          <Link to={link + "/:" + g.id}>
+                        <tr className="border-2 w-full border-green-800 cursor-pointer hover:bg-green-200">
+                          <Link to={"/groups/" + g.id}>
                             <td
                               className=" border-green-800 py-1 px-4"
                               onClick={() => {

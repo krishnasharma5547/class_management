@@ -67,7 +67,7 @@ function App() {
             </Route>
             <Route
               exact
-              path="/groups/:id"
+              path="/groups/:groupId"
               component={FullCardShowPage}
             ></Route>
             <Route exact path="/noInternet">

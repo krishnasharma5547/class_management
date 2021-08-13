@@ -23,7 +23,7 @@ const AppContainer: React.FC<props> = () => {
         <Route path="/groups">
           <Groups />
         </Route>
-        <Route path="/groups/:">
+        <Route path="/groups/:groupId">
           <FullCardShowPage />
         </Route>
       </Switch>

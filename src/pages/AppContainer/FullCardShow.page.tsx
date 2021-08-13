@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import BrandImage from "../../images/logo.svg";
 import { fetchCard, groupSerchingAction } from "../../actions/group.actions";
 import { fetchGroupById } from "../../Components/Api/Group";
@@ -15,10 +15,11 @@ import { useAppSelector } from "../../Store";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 interface props {}
 const FullCardShow: React.FC<props> = () => {
-  const location = useLocation();
-  var path = location.pathname;
-  var id = path.substr(path.lastIndexOf("/") + 2);
-  console.log(id);
+  // const location = useLocation();
+  // var path = location.pathname;
+  // var id = path.substr(path.lastIndexOf("/") + 2);
+  const groupId = useParams<{groupId:string}>().groupId;
+  console.log(groupId);
   // const [data, setdata] = useState<Group>();
   const dispatch = useDispatch();
   const isSearching = useAppSelector(groupIsSerchingSelector);
@@ -27,7 +28,7 @@ const FullCardShow: React.FC<props> = () => {
   useEffect(() => {
     dispatch(groupSerchingAction(true));
     // id !== 0 &&
-    fetchGroupById({ id: parseInt(id) }).then((group) => {
+    fetchGroupById({ id: parseInt(groupId) }).then((group) => {
       dispatch(fetchCard(group!));
       dispatch(groupSerchingAction(false));
       // setdata(group);
